@@ -1,0 +1,49 @@
+:root {
+   --height-header: 70px;
+   --width-nav: 320px;
+   --height-footer-drawer: 80px;
+}
+
+.trunc {
+   overflow: hidden;
+   white-space: nowrap;
+   text-overflow: ellipsis;
+}
+
+.wrapPagination {
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   padding: 20px;
+   width: mobile-desktop(calc(100vw - 40px) = calc(100vw - var(--width-nav) - 40px));
+   height: 100px;
+   border-radius: 20px;
+   box-shadow: light-dark(rgba(149, 157, 165, 0.5) 0px 8px 24px, var(--mantine-color-dark-8) 0px 8px 24px);
+   background-color: light-dark(white, var(--mantine-color-dark-6));
+}
+
+
+/*! SCROLLBAR - start */
+* {
+   scrollbar-width: thin;
+   scrollbar-color: rgba(100, 116, 139, 0.502) rgba(100, 116, 139, 0.161);
+ }
+ *::-webkit-scrollbar {
+   width: 0.1rem;
+ }
+ /* CSS for horizontal scrollbars */
+ *::-webkit-scrollbar:horizontal {
+   height: 0.1rem;
+ }
+ *::-webkit-scrollbar-track,
+ *::-webkit-scrollbar-track:horizontal,
+ *::-webkit-scrollbar-corner {
+   background-color: rgba(100, 116, 139, 0.161);
+ }
+ *::-webkit-scrollbar-thumb,
+ *::-webkit-scrollbar-thumb:horizontal {
+   border-radius: 5px;
+   background-color: rgba(100, 116, 139, 0.502);
+ }
+ /* SCROLLBAR - end */
+ 

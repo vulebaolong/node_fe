@@ -1,0 +1,32 @@
+.headerAdmin {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 8px 16px;
+   position: fixed;
+   z-index: 3;
+   top: 0;
+   right: 0;
+   backdrop-filter: blur(30px);
+   background-color: light-dark(white, var(--mantine-color-dark-8));
+
+   height: var(--height-header);
+   /* border-bottom: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)); */
+   width: mobile-desktop(100vw = calc(100vw - var(--width-nav)));
+   box-shadow: light-dark(rgb(0, 0, 0, 0.7) 0px 10px 16px -10px, rgb(0, 0, 0, 0.7) 0px 20px 30px -10px);
+}
+
+.textAvatar {
+   padding: calc(var(--mantine-spacing-xs) / 1.5) var(--mantine-spacing-sm);
+}
+
+.widthText {
+   width: 40px;
+}
+
+.logoMobile {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}

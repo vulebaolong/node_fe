@@ -1,0 +1,30 @@
+.card {
+   background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
+   cursor: pointer;
+}
+
+.section {
+   border-bottom: rem(1px) solid
+      light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+   padding: var(--mantine-spacing-md);
+}
+
+.label {
+   text-transform: uppercase;
+   font-size: var(--mantine-font-size-xs);
+   font-weight: 700;
+}
+
+.one {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+   gap: 20px;
+   margin-top: 20px;
+}
+
+.two {
+   display: grid;
+   grid-template-columns: 38px auto;
+   align-items: center;
+   gap: 0px 10px;
+}
