@@ -1,6 +1,5 @@
 import { ActionIcon, Box, Burger, Button, Group } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconMenu } from "@tabler/icons-react";
 import {
    MOBILE_HIDDEN_DESKTOP_VISIBLE,
    MOBILE_VISIBLE_DESKTOP_HIDDEN,
@@ -40,14 +39,14 @@ export default function Header() {
                      <Button
                         variant="default"
                         onClick={() => {
-                           rootRouter.navigate(ROUTER.LOGIN());
+                           rootRouter.navigate(ROUTER.LOGIN);
                         }}
                      >
                         Log in
                      </Button>
                      <Button
                         onClick={() => {
-                           rootRouter.navigate(ROUTER.REGISTER());
+                           rootRouter.navigate(ROUTER.REGISTER);
                         }}
                      >
                         Register

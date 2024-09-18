@@ -128,7 +128,7 @@ export default function Register() {
                fw={700}
                onClick={(event) => {
                   event.preventDefault();
-                  rootRouter.navigate(ROUTER.LOGIN());
+                  rootRouter.navigate(ROUTER.LOGIN);
                }}
             >
                Login

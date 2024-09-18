@@ -49,12 +49,14 @@ export function FacebookButton(props: ButtonProps & React.ComponentPropsWithoutR
                   setRefreshToken(result.metaData.refreshToken);
                   dispatch(UPDATE_IS_LOGIN());
                   // toast.success(`Login successfully`);
-                  rootRouter.navigate(ROUTER.HOME());
-                  setLoading(false);
+                  rootRouter.navigate(ROUTER.HOME);
                },
                onError: (error) => {
                   console.log(error);
                   toast.error(resError(error, `Login failed`));
+               },
+               onSettled: () => {
+                  setLoading(false);
                },
             });
          },

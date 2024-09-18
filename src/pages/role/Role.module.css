@@ -1,0 +1,24 @@
+.one {
+   display: grid;
+   gap: 20px;
+   grid-template-columns: 1fr 1fr 1fr;
+   width: 100%;
+}
+
+.two {
+   padding: 10px 20px;
+   box-shadow: light-dark(rgba(149, 157, 165, 0.2) 0px 8px 24px, rgba(86, 89, 92, 0.2) 0px 8px 24px);
+   border-radius: 10px;
+   background-color: light-dark(light, var(--mantine-color-dark-5));
+}
+
+.title {
+   width: 70px;
+}
+
+.moduleWrap {
+   gap: 20px;
+   display: grid;
+   grid-template-columns: mobile-desktop(1fr = 1fr 1fr);
+}
+

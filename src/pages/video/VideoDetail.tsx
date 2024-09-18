@@ -21,6 +21,7 @@ import classes from "./Video.module.css";
 import CommentVideo from "./comment/CommentVideo";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
+import { checkPathAvatar } from "../../helpers/function.helper";
 
 export default function VideoDetail() {
    const [lineClamp, toggleLineClamp] = useToggle([3, 0]);
@@ -105,7 +106,7 @@ export default function VideoDetail() {
             </Title>
 
             <Group>
-               <Avatar src={videoDetail.data?.users?.avatar} />
+               <Avatar src={checkPathAvatar(videoDetail.data?.users?.avatar)} alt="avatar" />
                <Text fz="lg" fw={500} truncate="end">
                   {videoDetail.data?.users.full_name}
                </Text>

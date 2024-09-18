@@ -3,6 +3,7 @@ import App from "./App.tsx";
 import "react-toastify/dist/ReactToastify.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
+import '@mantine/dropzone/styles.css';
 import "./common/styles/global.css";
 import "./common/styles/animation.css";
 import Provider from "./common/provider/Provider.tsx";

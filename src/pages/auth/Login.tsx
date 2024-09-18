@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useLogin } from "../../common/api/tanstack/auth.tanstack";
 import { FacebookButton } from "../../common/components/buttons/FacebookButton";
-import { Default, WithMultipleApp } from "../../common/components/buttons/FacebookTest";
 import { GoogleButton } from "../../common/components/buttons/GoogleButton";
 import { Logo } from "../../common/components/logo/Logo";
 import CustomPasswordInput from "../../common/components/password-input/CustomPasswordInput";
@@ -27,7 +26,6 @@ import rootRouter from "../../routes/rootRouter";
 import { UPDATE_IS_LOGIN } from "../../store/slices/user/user.slice";
 import { useAppDispatch } from "../../store/store";
 import { TLoginReq } from "../../types/user.type";
-import FacebookLogin from "@greatsumini/react-facebook-login";
 
 export default function Login() {
    const login = useLogin();
@@ -54,7 +52,7 @@ export default function Login() {
                setRefreshToken(result.metaData.refreshToken);
                dispatch(UPDATE_IS_LOGIN());
                toast.success(`Login successfully`);
-               rootRouter.navigate(ROUTER.HOME());
+               rootRouter.navigate(ROUTER.HOME);
             },
             onError: (error) => {
                console.log(error);
@@ -130,7 +128,7 @@ export default function Login() {
                <Group justify="end">
                   <Anchor
                      onClick={() => {
-                        rootRouter.navigate(ROUTER.FORGOT_PASSWORD());
+                        rootRouter.navigate(ROUTER.FORGOT_PASSWORD);
                      }}
                      type="button"
                      component="button"
@@ -158,7 +156,7 @@ export default function Login() {
                fw={700}
                onClick={(event) => {
                   event.preventDefault();
-                  rootRouter.navigate(ROUTER.REGISTER());
+                  rootRouter.navigate(ROUTER.REGISTER);
                }}
             >
                Register

@@ -3,19 +3,20 @@ import { toast } from "react-toastify";
 import { ENDPOINT } from "../../../constant/endpoint.constant";
 import { ROUTER } from "../../../constant/router.constant";
 import {
-   getAccessToken,
-   logOut,
-   setAccessToken,
-   setRefreshToken,
+   getAccessToken
 } from "../../../helpers/auth.helper";
 import { resError } from "../../../helpers/function.helper";
 import rootRouter from "../../../routes/rootRouter";
-import { SET_INFO, UPDATE_IS_LOGIN } from "../../../store/slices/user/user.slice";
-import { useAppDispatch } from "../../../store/store";
 import { TRes } from "../../../types/app.type";
-import { TLoginReq, TLoginRes, TRegisterReq, TUser } from "../../../types/user.type";
-import api from "../axios/axios";
 import { TLoginFacebookReq } from "../../../types/facebook.type";
+import {
+   TLoginReq,
+   TLoginRes,
+   TRegisterReq,
+   TResetPasswordReq,
+   TSendEmailReq
+} from "../../../types/user.type";
+import api from "../axios/axios";
 
 export const useRegister = () => {
    return useMutation({
@@ -24,7 +25,7 @@ export const useRegister = () => {
       },
       onSuccess: () => {
          toast.success(`Register successfully`);
-         rootRouter.navigate(ROUTER.LOGIN());
+         rootRouter.navigate(ROUTER.LOGIN);
       },
       onError: (error) => {
          console.log(error);
@@ -38,23 +39,6 @@ export const useLogin = () => {
       mutationFn: async (payload: TLoginReq) => {
          const { data } = await api.post<TRes<TLoginRes>>(ENDPOINT.AUTH.LOGIN(), payload);
          return data;
-      },
-   });
-};
-
-export const useInfo = () => {
-   const dispatch = useAppDispatch();
-   return useMutation({
-      mutationFn: async () => {
-         const { data } = await api.get<TRes<TUser>>(ENDPOINT.AUTH.GET_INFO());
-         return data.metaData;
-      },
-      onSuccess: (data) => {
-         dispatch(SET_INFO(data));
-      },
-      onError: () => {
-         console.log(`logout`);
-         logOut();
       },
    });
 };
@@ -83,6 +67,33 @@ export const useLoginFacebook = () => {
    return useMutation({
       mutationFn: async (payload: TLoginFacebookReq) => {
          const { data } = await api.post<TRes<TLoginRes>>(ENDPOINT.AUTH.FACEBOOK_LOGIN(), payload);
+         return data;
+      },
+   });
+};
+
+export const useLoginGoolge = () => {
+   return useMutation({
+      mutationFn: async (payload: { code: string }) => {
+         const { data } = await api.post<TRes<any>>(ENDPOINT.AUTH.GOOGLE_LOGIN(), payload);
+         return data;
+      },
+   });
+};
+
+export const useResetPassword = () => {
+   return useMutation({
+      mutationFn: async (payload: TResetPasswordReq) => {
+         const { data } = await api.post<TRes<any>>(ENDPOINT.AUTH.RESET_PASSWORD(), payload);
+         return data;
+      },
+   });
+};
+
+export const useSendEmail = () => {
+   return useMutation({
+      mutationFn: async (payload: TSendEmailReq) => {
+         const { data } = await api.post<TRes<any>>(ENDPOINT.AUTH.SEND_EMAIL(), payload);
          return data;
       },
    });

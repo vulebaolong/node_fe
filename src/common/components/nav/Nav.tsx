@@ -10,15 +10,18 @@ import { logOut } from "../../../helpers/auth.helper";
 
 
 const LIST_NAV = [
-   { link: ROUTER.HOME(), label: "Home", icon: Icons.IconHome },
+   { link: ROUTER.HOME, label: "Home", icon: Icons.IconHome },
+   { link: ROUTER.PROFILE.BASE, label: "Profile", icon: Icons.IconUserCircle },
    // { link: "notifications", label: "Notifications", icon: Icons.IconBellRinging },
-   { link: ROUTER.VIDEO.VIDEO_LIST(), label: "Video", icon: Icons.IconVideo },
-   { link: ROUTER.CHAT, label: "Chat", icon: Icons.IconMessageCircle },
+   { link: ROUTER.VIDEO.BASE, label: "Video", icon: Icons.IconVideo },
+   { link: ROUTER.CHAT.BASE, label: "Chat", icon: Icons.IconMessageCircle },
+   { link: ROUTER.ROLE.BASE, label: "Role", icon: Icons.IconLicense },
+   { link: ROUTER.USERS.BASE, label: "Users", icon: Icons.IconUsersGroup },
    // { link: "security", label: "Security", icon: Icons.IconFingerprint },
    // { link: "key", label: "SSH Keys", icon: Icons.IconKey },
    // { link: "", label: "Databases", icon: Icons.IconDatabaseImport },
    // { link: "", label: "Authentication", icon: Icons.Icon2fa },
-   { link: ROUTER.SETTING(), label: "Settings", icon: Icons.IconSettings },
+   { link: ROUTER.SETTING, label: "Settings", icon: Icons.IconSettings },
 ];
 
 type TProps = {

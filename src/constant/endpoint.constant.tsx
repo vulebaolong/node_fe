@@ -6,6 +6,9 @@ export const ENDPOINT = {
       REFRESH_TOKEN: () => `${ENDPOINT.AUTH.BASE}/refresh-token`,
       GET_INFO: () => `${ENDPOINT.AUTH.BASE}/get-info`,
       FACEBOOK_LOGIN: () => `${ENDPOINT.AUTH.BASE}/facebook-login`,
+      GOOGLE_LOGIN: () => `${ENDPOINT.AUTH.BASE}/google-login`,
+      RESET_PASSWORD: () => `${ENDPOINT.AUTH.BASE}/reset-password`,
+      SEND_EMAIL: () => `${ENDPOINT.AUTH.BASE}/send-email`,
    },
    VIDEO: {
       BASE: `video`,
@@ -19,5 +22,13 @@ export const ENDPOINT = {
       VIDEO_GET_LIKE: () => `${ENDPOINT.VIDEO.BASE}/video-like`,
       VIDEO_GET_TOAL_LIKE: () => `${ENDPOINT.VIDEO.BASE}/video-total-like`,
    },
+   CHAT: {
+      BASE: (id = "") => `/chat/${id}`,
+   },
    USER: `user`,
+   UPLOAD_AVATAR_LOCAL: `user/avatar-local`,
+   UPLOAD_AVATAR_CLOUD: `user/avatar-cloud`,
+   ROLE: `role`,
+   TOGGLE_PERMISSION: `role/toggle-permission`,
+   PERMISSION_GROUP_BY_MODULE: `permission/group-by-module`,
 };

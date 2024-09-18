@@ -9,7 +9,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 
 const rootRouter = createBrowserRouter([
    {
-      path: ROUTER.LOGIN(),
+      path: ROUTER.LOGIN,
       element: (
          <RootPage title="Login">
             <Login />
@@ -17,7 +17,7 @@ const rootRouter = createBrowserRouter([
       ),
    },
    {
-      path: ROUTER.REGISTER(),
+      path: ROUTER.REGISTER,
       element: (
          <RootPage title="Register">
             <Register />
@@ -25,7 +25,7 @@ const rootRouter = createBrowserRouter([
       ),
    },
    {
-      path: ROUTER.FORGOT_PASSWORD(),
+      path: ROUTER.FORGOT_PASSWORD,
       element: (
          <RootPage title="Register">
             <ForgotPassword />

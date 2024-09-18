@@ -1,13 +1,11 @@
 import { MantineProvider } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { HelmetProvider } from "react-helmet-async";
 import { Provider as ProviderRedux } from "react-redux";
 import { store } from "../../store/store";
+import GoogleProvider from "./google/GoogleProvider";
 import { theme } from "./mantaine/theme.maintaine";
 import ToastProvider from "./toast/ToastProvider";
-import { HelmetProvider } from "react-helmet-async";
-import { useNetwork } from "@mantine/hooks";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
 
 const queryClient = new QueryClient({
    defaultOptions: {
@@ -27,7 +25,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
             <HelmetProvider>
                <MantineProvider theme={theme}>
                   <ToastProvider />
-                  {children}
+                  <GoogleProvider>{children}</GoogleProvider>
                </MantineProvider>
             </HelmetProvider>
          </ProviderRedux>

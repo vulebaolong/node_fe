@@ -7,14 +7,7 @@ import { TUser } from "../../../types/user.type";
 import { AppDispatch } from "../../store";
 
 type TInitialState = {
-   info: {
-      user_id: number;
-      full_name: string;
-      email: string;
-      avatar: string;
-      role: any;
-      iat: number;
-   } | null;
+   info: TUser | null;
    isLogin: boolean;
 };
 

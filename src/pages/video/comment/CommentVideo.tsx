@@ -1,6 +1,5 @@
 import { Avatar, Box, Button, Center, Loader, Stack, Text, Textarea, Title } from "@mantine/core";
 import { useIntersection, useToggle } from "@mantine/hooks";
-import { useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import timezone from "dayjs/plugin/timezone";
@@ -8,12 +7,9 @@ import utc from "dayjs/plugin/utc";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-   useVideoComment,
-   useVideoCommentFirst,
-   useVideoCommentList,
-} from "../../../common/api/tanstack/video.tantask";
+import { useVideoComment, useVideoCommentFirst, useVideoCommentList } from "../../../common/api/tanstack/video.tantask";
 import Nodata from "../../../common/components/no-data/Nodata";
+import { checkPathAvatar } from "../../../helpers/function.helper";
 import { useAppSelector } from "../../../store/store";
 import { TVideoCommentRes } from "../../../types/video-type";
 import classes from "../Video.module.css";
@@ -123,7 +119,7 @@ export default function CommentVideo() {
                            className={classes.commentItem}
                            // ref={dataComment.length - 1 === i ? ref : null}
                         >
-                           <Avatar src={comment.users.avatar} alt="Jacob Warnhalter" radius="xl" />
+                           <Avatar src={checkPathAvatar(comment.users.avatar)} alt="avatar" radius="xl" />
                            <Box>
                               <Text fz="sm" fw={700}>
                                  {comment.users.full_name}
@@ -156,7 +152,7 @@ export default function CommentVideo() {
          </Title>
 
          <Box className={`${classes.commentMe}`}>
-            <Avatar style={{ cursor: `pointer` }} src={info?.avatar} alt="it's me" />
+            <Avatar style={{ cursor: `pointer` }} src={checkPathAvatar(info?.avatar)} alt="it's me" />
             <Textarea
                onChange={(value) => {
                   setContent(value.target.value);

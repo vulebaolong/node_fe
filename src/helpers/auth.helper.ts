@@ -1,4 +1,3 @@
-import { FacebookLoginClient } from "@greatsumini/react-facebook-login";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constant/app.constant";
 import { ROUTER } from "../constant/router.constant";
 import rootRouter from "../routes/rootRouter";
@@ -28,5 +27,5 @@ export function logOut() {
    dispatch(RESET_USER());
    dispatch(UPDATE_IS_LOGIN());
 
-   rootRouter.navigate(ROUTER.LOGIN());
+   rootRouter.navigate(ROUTER.LOGIN);
 }

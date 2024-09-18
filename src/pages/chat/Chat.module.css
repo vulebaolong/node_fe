@@ -16,11 +16,11 @@
    );
    height: 100%;
 }
-.left {
-   overflow-y: auto;
-   padding: 10px;
-}
-div.right {
+/* .left {
+   overflow: hidden;
+   gap: 10px;
+} */
+div.right, div.left {
    overflow: hidden;
    gap: 10px;
 }
@@ -35,7 +35,7 @@ div.right {
    }
 }
 
-.headerChat {
+.header {
    background-color: light-dark(rgba(0, 0, 0, 0.05), var(--mantine-color-dark-3));
    height: 60px;
    display: flex;

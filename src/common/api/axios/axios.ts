@@ -8,8 +8,6 @@ import {
    setAccessToken,
    setRefreshToken,
 } from "../../../helpers/auth.helper";
-import { QueryClient } from "@tanstack/react-query";
-import { ROUTER } from "../../../constant/router.constant";
 
 axios.defaults.withCredentials = true;
 
@@ -38,7 +36,6 @@ api.interceptors.request.use(
 
 let isRefreshing = false;
 let failedQueue: any[] = [];
-console.log(failedQueue);
 
 const processQueue = (error: any, token: string | null = null) => {
    failedQueue.forEach((prom) => {

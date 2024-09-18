@@ -1,13 +1,54 @@
+const BASE = "/";
+
 export const ROUTER = {
-   BASE: `/`,
-   HOME: () => `${ROUTER.BASE}`,
-   LOGIN: () => `${ROUTER.BASE}login`,
-   REGISTER: () => `${ROUTER.BASE}register`,
-   FORGOT_PASSWORD: () => `${ROUTER.BASE}forgot-password`,
+   HOME: BASE,
+   LOGIN: `${BASE}login`,
+   REGISTER: `${BASE}register`,
+   FORGOT_PASSWORD: `${BASE}forgot-password`,
+   SETTING: `${BASE}setting`,
    VIDEO: {
-      VIDEO_LIST: () => `${ROUTER.BASE}video`,
-      VIDEO_DETAIL: (videoId?: number) => `${ROUTER.BASE}video/${videoId || `:videoId`}`,
+      BASE: `${BASE}video`,
+      LIST() {
+         return this.BASE;
+      },
+      DETAIL(id: number | string = ":videoId") {
+         return `${this.BASE}/${id}`;
+      },
    },
-   CHAT: `chat`,
-   SETTING: () => `${ROUTER.BASE}setting`,
+   ROLE: {
+      BASE: `${BASE}role`,
+      LIST() {
+         return this.BASE;
+      },
+      DETAIL(id: number | string = ":roleId") {
+         return `${this.BASE}/${id}`;
+      },
+   },
+   CHAT: {
+      BASE: `${BASE}chat`,
+      LIST() {
+         return this.BASE;
+      },
+      DETAIL(id: number | string = ":chatId") {
+         return `${this.BASE}/${id}`;
+      },
+   },
+   USERS: {
+      BASE: `${BASE}users`,
+      LIST() {
+         return this.BASE;
+      },
+      DETAIL(id: number | string = ":userId") {
+         return `${this.BASE}/${id}`;
+      },
+   },
+   PROFILE: {
+      BASE: `${BASE}profile`,
+      LIST() {
+         return this.BASE;
+      },
+      DETAIL(id: number | string = ":profileId") {
+         return `${this.BASE}/${id}`;
+      },
+   },
 };

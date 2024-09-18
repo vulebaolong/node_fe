@@ -11,7 +11,7 @@ export function Logo({ width = `40px`, color = `blue` }: TProps) {
    return (
       <Box
          onClick={() => {
-            rootRouter.navigate(ROUTER.HOME());
+            rootRouter.navigate(ROUTER.HOME);
          }}
          style={{ cursor: `pointer` }}
       >

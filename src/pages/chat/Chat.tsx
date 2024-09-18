@@ -1,33 +1,18 @@
-import {
-   ActionIcon,
-   Avatar,
-   Box,
-   Group,
-   Loader,
-   rem,
-   Stack,
-   Text,
-   TextInput,
-   Transition,
-} from "@mantine/core";
+import { ActionIcon, Avatar, Box, Center, Group, Loader, rem, Stack, Text, TextInput, Transition } from "@mantine/core";
 import { getHotkeyHandler, useDebouncedCallback } from "@mantine/hooks";
-import {
-   IconArrowForward,
-   IconArrowForwardUp,
-   IconArrowNarrowLeft,
-   IconSend2,
-} from "@tabler/icons-react";
+import { IconArrowNarrowLeft, IconSearch, IconSend2 } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useCreateChat } from "../../common/api/tanstack/chat.tanstack";
 import { useGetUserList } from "../../common/api/tanstack/user.tanstack";
 import Nodata from "../../common/components/no-data/Nodata";
+import { useIsMobile } from "../../common/hooks/is-mobile.hooks";
 import { useAppSelector } from "../../store/store";
 import { TListChatRes } from "../../types/chat.type";
 import { TUserListRes } from "../../types/user.type";
 import classes from "./Chat.module.css";
-import { useIsMobile } from "../../common/hooks/is-mobile.hooks";
+import { checkPathAvatar } from "../../helpers/function.helper";
 
 const SOCKET_URL = "http://localhost:3070"; // Địa chỉ BE của bạn
 
@@ -37,7 +22,7 @@ export default function Chat() {
    const isMobile = useIsMobile();
 
    const { info } = useAppSelector((state) => state.user);
-   const [pagination, setPagination] = useState({
+   const [pagination] = useState({
       page: 1,
       pageSize: 100,
    });
@@ -56,12 +41,13 @@ export default function Chat() {
 
    const [value, setValue] = useState("");
 
+   const handleSearch = useDebouncedCallback(async (query: string) => {
+      setSearch(query);
+   }, 500);
+
    useEffect(() => {
       if (listMessage === null) return;
-      console.log(`scrollIntoView`);
-      if (bottomRef.current) {
-         bottomRef.current.scrollIntoView({ behavior: "smooth" });
-      }
+      if (bottomRef.current) bottomRef.current.scrollIntoView({ behavior: "smooth" });
       queryClient.invalidateQueries({ queryKey: [`user-list`] });
    }, [listMessage]);
 
@@ -76,6 +62,7 @@ export default function Chat() {
    useEffect(() => {
       if (!socketRef.current && info?.user_id) {
          console.log(info?.user_id);
+
          socketRef.current = io(SOCKET_URL, {
             query: { user_id: info?.user_id },
          });
@@ -98,9 +85,9 @@ export default function Chat() {
          //    queryClient.invalidateQueries({ queryKey: [`user-list`] });
          // });
 
-         socketRef.current.on("message", (data: any) => {
-            // console.log(data);
-         });
+         // socketRef.current.on("message", (data: any) => {
+         //    // console.log(data);
+         // });
 
          socketRef.current.on("get-list-message", (data: any) => {
             setListMessage(data);
@@ -133,7 +120,11 @@ export default function Chat() {
 
    const renderContentUser = () => {
       if (userList.isLoading) {
-         return <Loader size={`md`} mt={50} />;
+         return (
+            <Center>
+               <Loader size={`md`} mt={50} />
+            </Center>
+         );
       }
 
       if (userList.isError || !userList.data || userList.data?.items.length === 0) {
@@ -158,7 +149,7 @@ export default function Chat() {
                className={`${classes.itemUser}`}
                key={i}
             >
-               <Avatar src={user.avatar} alt="avatar" radius="xl" />
+               <Avatar src={checkPathAvatar(user.avatar)} alt="avatar" radius="xl" />
                <Box>
                   <Text fz="sm" fw={700}>
                      {user.full_name}
@@ -185,14 +176,7 @@ export default function Chat() {
          <>
             {listMessage.map((mes, i) => {
                return (
-                  <Box
-                     className={
-                        mes.user_id_sender === info?.user_id
-                           ? `${classes.mesRightWrap}`
-                           : `${classes.mesLeftWrap}`
-                     }
-                     key={i}
-                  >
+                  <Box className={mes.user_id_sender === info?.user_id ? `${classes.mesRightWrap}` : `${classes.mesLeftWrap}`} key={i}>
                      <Text className={`${classes.mes}`}>{mes.message}</Text>
                   </Box>
                );
@@ -204,32 +188,43 @@ export default function Chat() {
 
    return (
       <Box className={classes.wrap}>
-         <Transition
-            enterDelay={400}
-            mounted={isMobile ? step === 1 : true}
-            transition="slide-right"
-            duration={400}
-            timingFunction="ease"
-         >
+         {/* left */}
+         <Transition enterDelay={400} mounted={isMobile ? step === 1 : true} transition="slide-right" duration={400} timingFunction="ease">
             {(styles) => (
-               <div style={{ ...styles, height: `100%` }}>
-                  <Stack className={classes.left}>{renderContentUser()}</Stack>
+               <div style={styles}>
+                  <Stack className={classes.left}>
+                     {/* header */}
+                     <Box className={`${classes.header}`}>
+                        <TextInput
+                           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                              const value = event.currentTarget.value;
+                              // if (value.trim() === ``) return;
+                              handleSearch(value);
+                           }}
+                           radius="xl"
+                           size="md"
+                           styles={{ root: { width: `100%` } }}
+                           placeholder="Search users"
+                           leftSection={<IconSearch style={{ width: rem(18), height: rem(18) }} stroke={1.5} />}
+                        />
+                     </Box>
+
+                     {/* list user */}
+                     <Stack style={{ flex: `1`, overflowY: `auto` }} px={`10px`}>
+                        {renderContentUser()}
+                     </Stack>
+                  </Stack>
                </div>
             )}
          </Transition>
 
-         <Transition
-            enterDelay={400}
-            mounted={isMobile ? step === 2 : true}
-            transition="slide-right"
-            duration={400}
-            timingFunction="ease"
-         >
+         {/* right */}
+         <Transition enterDelay={400} mounted={isMobile ? step === 2 : true} transition="slide-right" duration={400} timingFunction="ease">
             {(styles) => (
                <div style={styles}>
                   <Stack className={classes.right}>
                      {/* header */}
-                     <Box className={`${classes.headerChat}`}>
+                     <Box className={`${classes.header}`}>
                         {isMobile && (
                            <ActionIcon
                               onClick={() => {
@@ -240,15 +235,12 @@ export default function Chat() {
                               radius={`100%`}
                               color="dark"
                            >
-                              <IconArrowNarrowLeft
-                                 color="var(--mantine-color-dark-1)"
-                                 style={{ width: rem(24), height: rem(24) }}
-                              />
+                              <IconArrowNarrowLeft color="var(--mantine-color-dark-1)" style={{ width: rem(24), height: rem(24) }} />
                            </ActionIcon>
                         )}
                         {userSelected && (
                            <Group>
-                              <Avatar src={userSelected.avatar} alt="avatar" radius="xl" />
+                              <Avatar src={checkPathAvatar(userSelected.avatar)} alt="avatar" radius="xl" />
                               <Text fz="sm" fw={700}>
                                  {userSelected.full_name}
                               </Text>
@@ -275,12 +267,7 @@ export default function Chat() {
                         {createChat.isPending ? (
                            <Loader size={`sm`} />
                         ) : (
-                           <ActionIcon
-                              onClick={handleSubmit}
-                              variant="subtle"
-                              size={`lg`}
-                              style={{ borderRadius: `100%` }}
-                           >
+                           <ActionIcon onClick={handleSubmit} variant="subtle" size={`lg`} style={{ borderRadius: `100%` }}>
                               <IconSend2 />
                            </ActionIcon>
                         )}
