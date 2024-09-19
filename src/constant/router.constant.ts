@@ -42,6 +42,15 @@ export const ROUTER = {
          return `${this.BASE}/${id}`;
       },
    },
+   PAYMENT: {
+      BASE: `${BASE}payment`,
+      LIST() {
+         return this.BASE;
+      },
+      DETAIL(id: number | string = ":paymentId") {
+         return `${this.BASE}/${id}`;
+      },
+   },
    PROFILE: {
       BASE: `${BASE}profile`,
       LIST() {

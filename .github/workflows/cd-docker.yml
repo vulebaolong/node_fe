@@ -1,0 +1,35 @@
+name: CD docker
+
+on:
+   workflow_run:
+      workflows: ["CI docker"]
+      types:
+         - completed
+
+jobs:
+   build:
+      runs-on: node_docker
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+
+      steps:
+         - name: Delete old .env file
+           run: |
+              sudo rm -f .env || true
+
+         - name: Create new .env file and add environment variables
+           run: |
+              echo "PORT=${{ vars.PORT }}" >> .env
+
+         - name: Stop running containers
+           run: |
+              sudo docker stop cons_node_fe || true
+              sudo docker rm cons_node_fe || true
+
+         - name: Delete old docker image
+           run: sudo docker rmi vulebaolong/img_node_fe:latest || true
+
+         - name: Pull Docker image
+           run: sudo docker pull vulebaolong/img_node_fe:latest
+
+         - name: Run Docker Compose
+           run: sudo docker run -d -p 5173:80 --name cons_node_fe img_node_fe 

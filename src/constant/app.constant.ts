@@ -1,4 +1,5 @@
-export const BASE_DOMAIN_API = `http://localhost:3069/`
+// export const BASE_DOMAIN_API = `http://localhost:3069/`
+export const BASE_DOMAIN_API = `https://api-expressjs-node.vulebaolong.com/`
 export const BASE_DOMAIN_CLOUDINARY = `https://res.cloudinary.com/vulebaolong/image/upload/`
 export const FOLDER_IMAGE_BE = `images/`
 

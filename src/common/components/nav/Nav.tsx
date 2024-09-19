@@ -17,6 +17,7 @@ const LIST_NAV = [
    { link: ROUTER.CHAT.BASE, label: "Chat", icon: Icons.IconMessageCircle },
    { link: ROUTER.ROLE.BASE, label: "Role", icon: Icons.IconLicense },
    { link: ROUTER.USERS.BASE, label: "Users", icon: Icons.IconUsersGroup },
+   { link: ROUTER.PAYMENT.BASE, label: "Payment", icon: Icons.IconCreditCardPay },
    // { link: "security", label: "Security", icon: Icons.IconFingerprint },
    // { link: "key", label: "SSH Keys", icon: Icons.IconKey },
    // { link: "", label: "Databases", icon: Icons.IconDatabaseImport },

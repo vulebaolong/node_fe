@@ -2,6 +2,7 @@ import NotFound from "../common/components/notifications/NotFound";
 import { ROUTER } from "../constant/router.constant";
 import Chat from "../pages/chat/Chat";
 import Home from "../pages/home/Home";
+import Payment from "../pages/payment/Payment";
 import { Profile } from "../pages/profile/Profile";
 import Role from "../pages/role/Role";
 import RoleDetail from "../pages/role/RoleDetail";
@@ -73,6 +74,14 @@ const clientRouter = [
       element: (
          <RootPage title="Profile" protect>
             <Profile />
+         </RootPage>
+      ),
+   },
+   {
+      path: ROUTER.PAYMENT.BASE,
+      element: (
+         <RootPage title="Payment" protect>
+            <Payment />
          </RootPage>
       ),
    },

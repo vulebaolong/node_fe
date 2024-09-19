@@ -9,8 +9,6 @@ import {
    setRefreshToken,
 } from "../../../helpers/auth.helper";
 
-axios.defaults.withCredentials = true;
-
 const api = axios.create({
    baseURL: BASE_DOMAIN_API,
    headers: {
