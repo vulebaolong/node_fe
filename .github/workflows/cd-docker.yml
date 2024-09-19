@@ -20,7 +20,6 @@ jobs:
               echo "VITE_BASE_DOMAIN_API=${{ vars.VITE_BASE_DOMAIN_API }}" >> .env
               echo "VITE_IS_PRODUCTION=$([[ '${{ github.ref }}' == 'refs/heads/main' ]] && echo 'true' || echo 'false')" >> .env
 
-
          - name: Stop running containers
            run: sudo docker stop cons_node_fe || true
 
@@ -34,4 +33,8 @@ jobs:
            run: sudo docker pull vulebaolong/img_node_fe:latest || true
 
          - name: Run Docker Compose
-           run: sudo docker run -d -p 5173:80 --name cons_node_fe vulebaolong/img_node_fe:latest
+           run: |
+              sudo docker run -d -p 5173:80 \
+                -e VITE_BASE_DOMAIN_API=${{ vars.VITE_BASE_DOMAIN_API }} \
+                -e VITE_IS_PRODUCTION=$([[ "${{ github.ref }}" == "refs/heads/main" ]] && echo "true" || echo "false") \
+                --name cons_node_fe vulebaolong/img_node_fe:latest
