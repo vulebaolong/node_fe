@@ -64,7 +64,7 @@ export default function Chat() {
 
          socketRef.current = io(BASE_DOMAIN_API, {
             query: { user_id: info?.user_id },
-            transports: ["websocket"],
+            transports: ["polling"],
             secure: isProduction,
          });
 
