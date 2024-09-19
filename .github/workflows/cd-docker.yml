@@ -9,7 +9,6 @@ on:
 jobs:
    build:
       runs-on: node_fe
-      environment: ${{ github.ref == 'refs/heads/main' && 'production' || (github.ref == 'refs/heads/developer' && 'development' || 'default') }}
 
       steps:
          - name: Stop running containers

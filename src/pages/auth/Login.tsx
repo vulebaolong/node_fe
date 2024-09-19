@@ -72,11 +72,8 @@ export default function Login() {
             ta="center"
             style={{ fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}
          >
-            Welcome back! ANH LONG
+            Welcome back!
          </Title>
-
-         {/* <Default /> */}
-         {/* <WithMultipleApp /> */}
 
          <Group grow mb="md" mt="md">
             <GoogleButton radius="xl">Google</GoogleButton>
