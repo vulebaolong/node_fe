@@ -4,6 +4,7 @@ import rootRouter from "./routes/rootRouter";
 function App() {
    return (
       <>
+      
          <RouterProvider router={rootRouter} />
       </>
    );
