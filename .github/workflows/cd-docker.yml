@@ -16,7 +16,10 @@ jobs:
            run: sudo rm -f .env || true
 
          - name: Create new .env file and add environment variables
-           run: echo "VITE_IS_PRODUCTION=${{ vars.VITE_BASE_DOMAIN_API }}" >> .env
+           run: |
+              echo "VITE_BASE_DOMAIN_API=${{ vars.VITE_BASE_DOMAIN_API }}" >> .env
+              echo "VITE_IS_PRODUCTION=$([[ '${{ github.ref }}' == 'refs/heads/main' ]] && echo 'true' || echo 'false')" >> .env
+
 
          - name: Stop running containers
            run: sudo docker stop cons_node_fe || true

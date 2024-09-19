@@ -1,4 +1,8 @@
+export let isProduction = import.meta.env.VITE_IS_PRODUCTION === 'true';
+
 export const BASE_DOMAIN_API = import.meta.env.VITE_BASE_DOMAIN_API || `http://localhost:3069/`;
+
+export const IS_CONSOLE_LOG = "log";
 
 export const BASE_DOMAIN_CLOUDINARY = `https://res.cloudinary.com/vulebaolong/image/upload/`;
 export const FOLDER_IMAGE_BE = `images/`;
