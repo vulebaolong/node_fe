@@ -1,22 +1,29 @@
 name: CI docker
 
 on:
-  push:
-    branches: [ "main" ]
+   push:
+      branches: ["main"]
 
 jobs:
+   build:
+      runs-on: ubuntu-latest
 
-  build:
-    runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v4
 
-    steps:
-    - uses: actions/checkout@v4
+         - name: Login Dockerhub
+           run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
 
-    - name: Login Dockerhub
-      run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+         - name: Delete old .env file
+           run: sudo rm -f .env || true
 
-    - name: Build the Docker image
-      run: docker build -t vulebaolong/img_node_fe:latest .
-      
-    - name: Push to DockerHub
-      run: docker push vulebaolong/img_node_fe:latest
+         - name: Create new .env file and add environment variables
+           run: |
+              echo "VITE_BASE_DOMAIN_API=${{ vars.VITE_BASE_DOMAIN_API }}" >> .env
+              echo "VITE_IS_PRODUCTION=$([[ '${{ github.ref }}' == 'refs/heads/main' ]] && echo 'true' || echo 'false')" >> .env
+
+         - name: Build the Docker image
+           run: docker build -t vulebaolong/img_node_fe:latest .
+
+         - name: Push to DockerHub
+           run: docker push vulebaolong/img_node_fe:latest

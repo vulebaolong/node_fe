@@ -12,14 +12,6 @@ jobs:
       environment: ${{ github.ref == 'refs/heads/main' && 'production' || (github.ref == 'refs/heads/developer' && 'development' || 'default') }}
 
       steps:
-         - name: Delete old .env file
-           run: sudo rm -f .env || true
-
-         - name: Create new .env file and add environment variables
-           run: |
-              echo "VITE_BASE_DOMAIN_API=${{ vars.VITE_BASE_DOMAIN_API }}" >> .env
-              echo "VITE_IS_PRODUCTION=$([[ '${{ github.ref }}' == 'refs/heads/main' ]] && echo 'true' || echo 'false')" >> .env
-
          - name: Stop running containers
            run: sudo docker stop cons_node_fe || true
 
@@ -34,7 +26,4 @@ jobs:
 
          - name: Run Docker Compose
            run: |
-              sudo docker run -d -p 5173:80 \
-                -e VITE_BASE_DOMAIN_API=${{ vars.VITE_BASE_DOMAIN_API }} \
-                -e VITE_IS_PRODUCTION=$([[ "${{ github.ref }}" == "refs/heads/main" ]] && echo "true" || echo "false") \
-                --name cons_node_fe vulebaolong/img_node_fe:latest
+              sudo docker run -d -p 5173:80 --name cons_node_fe vulebaolong/img_node_fe:latest
