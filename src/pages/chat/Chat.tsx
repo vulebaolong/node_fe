@@ -8,13 +8,12 @@ import { useCreateChat } from "../../common/api/tanstack/chat.tanstack";
 import { useGetUserList } from "../../common/api/tanstack/user.tanstack";
 import Nodata from "../../common/components/no-data/Nodata";
 import { useIsMobile } from "../../common/hooks/is-mobile.hooks";
+import { BASE_DOMAIN_API, isProduction } from "../../constant/app.constant";
+import { checkPathAvatar } from "../../helpers/function.helper";
 import { useAppSelector } from "../../store/store";
 import { TListChatRes } from "../../types/chat.type";
 import { TUserListRes } from "../../types/user.type";
 import classes from "./Chat.module.css";
-import { checkPathAvatar } from "../../helpers/function.helper";
-
-const SOCKET_URL = "http://localhost:3070"; // Địa chỉ BE của bạn
 
 export default function Chat() {
    const bottomRef = useRef<HTMLDivElement>(null);
@@ -63,8 +62,10 @@ export default function Chat() {
       if (!socketRef.current && info?.user_id) {
          console.log(info?.user_id);
 
-         socketRef.current = io(SOCKET_URL, {
+         socketRef.current = io(BASE_DOMAIN_API, {
             query: { user_id: info?.user_id },
+            transports: ["websocket"],
+            secure: isProduction,
          });
 
          socketRef.current.on("connect", () => {

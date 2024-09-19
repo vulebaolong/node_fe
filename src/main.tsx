@@ -1,12 +1,12 @@
-import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import "react-toastify/dist/ReactToastify.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/dropzone/styles.css";
-import "./common/styles/global.css";
-import "./common/styles/animation.css";
+import ReactDOM from "react-dom/client";
+import "react-toastify/dist/ReactToastify.css";
+import App from "./App.tsx";
 import Provider from "./common/provider/Provider.tsx";
+import "./common/styles/animation.css";
+import "./common/styles/global.css";
 import { BASE_DOMAIN_API, IS_CONSOLE_LOG, isProduction } from "./constant/app.constant.ts";
 
 if (isProduction) {
