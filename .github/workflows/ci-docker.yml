@@ -7,6 +7,7 @@ on:
 jobs:
    build:
       runs-on: ubuntu-latest
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || (github.ref == 'refs/heads/developer' && 'development' || 'default') }}
 
       steps:
          - uses: actions/checkout@v4

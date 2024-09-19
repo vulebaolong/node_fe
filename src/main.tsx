@@ -17,7 +17,12 @@ if (isProduction) {
    }
 }
 
-console.log({ BASE_DOMAIN_API, isProduction });
+console.log({
+   BASE_DOMAIN_API,
+   isProduction,
+   "import.meta.env.VITE_IS_PRODUCTION": import.meta.env.VITE_IS_PRODUCTION,
+   "import.meta.env.VITE_BASE_DOMAIN_API": import.meta.env.VITE_BASE_DOMAIN_API,
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
    <Provider>
