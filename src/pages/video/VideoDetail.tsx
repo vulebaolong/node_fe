@@ -1,27 +1,18 @@
 import { Box, Button, Group, Stack, Text, Title } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
-import {
-   IconThumbDown,
-   IconThumbDownFilled,
-   IconThumbUp,
-   IconThumbUpFilled,
-} from "@tabler/icons-react";
+import { IconThumbDown, IconThumbDownFilled, IconThumbUp, IconThumbUpFilled } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-   useGetTotalLike,
-   useVideoDetail,
-   useVideoDisLike,
-   useVideoGetLike,
-   useVideoLike,
-} from "../../common/api/tanstack/video.tantask";
+import { useGetTotalLike, useVideoDetail, useVideoDisLike, useVideoGetLike, useVideoLike } from "../../common/api/tanstack/video.tantask";
 import { Avatar } from "../../common/components/avatar/Avatar";
 import Loader from "../../common/components/loader/Loader";
 import Nodata from "../../common/components/no-data/Nodata";
 import classes from "./Video.module.css";
 import CommentVideo from "./comment/CommentVideo";
+
+const abc = ``;
 
 export default function VideoDetail() {
    const [lineClamp, toggleLineClamp] = useToggle([3, 0]);
@@ -111,13 +102,7 @@ export default function VideoDetail() {
                   {videoDetail.data?.users.full_name}
                </Text>
                <Button.Group>
-                  <Button
-                     onClick={handleLike}
-                     leftSection={
-                        videoGetLike.data?.is_like ? <IconThumbUpFilled /> : <IconThumbUp />
-                     }
-                     variant="default"
-                  >
+                  <Button onClick={handleLike} leftSection={videoGetLike.data?.is_like ? <IconThumbUpFilled /> : <IconThumbUp />} variant="default">
                      {getTotalLike.data || 0}
                   </Button>
                   <Button onClick={handleDisLike} variant="default">

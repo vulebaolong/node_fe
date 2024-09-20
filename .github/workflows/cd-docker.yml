@@ -10,6 +10,8 @@ jobs:
    build:
       runs-on: node_fe
 
+      if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
       steps:
          - name: Stop running containers
            run: sudo docker stop cons_node_fe || true
