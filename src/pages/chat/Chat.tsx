@@ -1,4 +1,4 @@
-import { ActionIcon, Avatar, Box, Center, Group, Loader, rem, Stack, Text, TextInput, Transition } from "@mantine/core";
+import { ActionIcon, Box, Center, Group, Loader, rem, Stack, Text, TextInput, Transition } from "@mantine/core";
 import { getHotkeyHandler, useDebouncedCallback } from "@mantine/hooks";
 import { IconArrowNarrowLeft, IconSearch, IconSend2 } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -14,6 +14,7 @@ import { useAppSelector } from "../../store/store";
 import { TListChatRes } from "../../types/chat.type";
 import { TUserListRes } from "../../types/user.type";
 import classes from "./Chat.module.css";
+import { Avatar } from "../../common/components/avatar/Avatar";
 
 export default function Chat() {
    const bottomRef = useRef<HTMLDivElement>(null);
@@ -151,7 +152,7 @@ export default function Chat() {
                className={`${classes.itemUser}`}
                key={i}
             >
-               <Avatar src={checkPathAvatar(user.avatar)} alt="avatar" radius="xl" />
+               <Avatar user={user} />
                <Box>
                   <Text fz="sm" fw={700}>
                      {user.full_name}
@@ -242,7 +243,7 @@ export default function Chat() {
                         )}
                         {userSelected && (
                            <Group>
-                              <Avatar src={checkPathAvatar(userSelected.avatar)} alt="avatar" radius="xl" />
+                              <Avatar user={userSelected} />
                               <Text fz="sm" fw={700}>
                                  {userSelected.full_name}
                               </Text>

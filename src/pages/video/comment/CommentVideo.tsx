@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Center, Loader, Stack, Text, Textarea, Title } from "@mantine/core";
+import { Box, Button, Center, Loader, Stack, Text, Textarea, Title } from "@mantine/core";
 import { useIntersection, useToggle } from "@mantine/hooks";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -13,6 +13,7 @@ import { checkPathAvatar } from "../../../helpers/function.helper";
 import { useAppSelector } from "../../../store/store";
 import { TVideoCommentRes } from "../../../types/video-type";
 import classes from "../Video.module.css";
+import { Avatar } from "../../../common/components/avatar/Avatar";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(relativeTime);
@@ -119,7 +120,7 @@ export default function CommentVideo() {
                            className={classes.commentItem}
                            // ref={dataComment.length - 1 === i ? ref : null}
                         >
-                           <Avatar src={checkPathAvatar(comment.users.avatar)} alt="avatar" radius="xl" />
+                           <Avatar user={comment.users} />
                            <Box>
                               <Text fz="sm" fw={700}>
                                  {comment.users.full_name}
@@ -152,7 +153,7 @@ export default function CommentVideo() {
          </Title>
 
          <Box className={`${classes.commentMe}`}>
-            <Avatar style={{ cursor: `pointer` }} src={checkPathAvatar(info?.avatar)} alt="it's me" />
+            <Avatar style={{ cursor: `pointer` }} user={info} />
             <Textarea
                onChange={(value) => {
                   setContent(value.target.value);

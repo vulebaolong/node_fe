@@ -1,13 +1,13 @@
-import { ActionIcon, Avatar, Box, Card, Image, Loader as LoaderMantine, Pagination, rem, Select, Text, TextInput, Title } from "@mantine/core";
+import { ActionIcon, Box, Card, Image, Loader as LoaderMantine, Pagination, rem, Select, Text, TextInput, Title } from "@mantine/core";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { useVideoList } from "../../common/api/tanstack/video.tantask";
+import { Avatar } from "../../common/components/avatar/Avatar";
 import Loader from "../../common/components/loader/Loader";
 import Nodata from "../../common/components/no-data/Nodata";
 import { theme } from "../../common/provider/mantaine/theme.maintaine";
 import { ROUTER } from "../../constant/router.constant";
-import { checkPathAvatar } from "../../helpers/function.helper";
 import rootRouter from "../../routes/rootRouter";
 import { TVideo } from "../../types/video-type";
 import classes from "./Video.module.css";
@@ -81,7 +81,7 @@ export default function Video() {
 
                      <Card.Section className={classes.section} mt="md">
                         <Box className={classes.two}>
-                           <Avatar src={checkPathAvatar(video.users.avatar)} alt="avatar" />
+                           <Avatar user={video.users} />
                            <Text fz="lg" fw={500} truncate="end">
                               {video.video_name}
                            </Text>

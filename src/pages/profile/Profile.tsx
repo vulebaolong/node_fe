@@ -1,12 +1,14 @@
-import { Avatar, Button, Center, Group, Paper, rem, Stack, Text } from "@mantine/core";
+import { Avatar as AvatarMantine, Button, Center, Group, Paper, rem, Stack, Text } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { IconPhoto, IconUpload, IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useUploadAvatarCloud, useUploadAvatarLocal } from "../../common/api/tanstack/user.tanstack";
-import { checkPathAvatar, resError } from "../../helpers/function.helper";
+import { Avatar } from "../../common/components/avatar/Avatar";
+import { resError } from "../../helpers/function.helper";
 import { getInfo } from "../../store/slices/user/user.slice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
+import { Badge } from "../../common/components/badge/Badge";
 
 export function Profile() {
    const { info } = useAppSelector((state) => state.user);
@@ -59,13 +61,19 @@ export function Profile() {
    return (
       <Stack>
          <Paper shadow="lg" radius="lg" withBorder p="lg" bg="var(--mantine-color-body)">
-            <Avatar src={checkPathAvatar(info?.avatar)} size={120} radius={120} mx="auto" alt="avatar"/>
+            <Avatar user={info} size={120} radius={120} mx="auto" />
+
             <Text ta="center" fz="lg" fw={500} mt="md">
                {info?.full_name}
             </Text>
+
             <Text ta="center" c="dimmed" fz="sm">
                {info?.email}
             </Text>
+
+            <Center mt={10}>
+               <Badge user={info} />
+            </Center>
 
             <Button variant="default" fullWidth mt="md">
                Send message
@@ -91,7 +99,7 @@ export function Profile() {
                   <IconX style={{ width: rem(52), height: rem(52), color: "var(--mantine-color-red-6)" }} stroke={1.5} />
                </Dropzone.Reject>
                <Dropzone.Idle>
-                  {preview ? <Avatar src={preview} size={120} radius={120} alt="avatar"/> : <IconPhoto style={{ width: rem(52), height: rem(52), color: "var(--mantine-color-dimmed)" }} stroke={1.5} />}
+                  {preview ? <AvatarMantine src={preview} size={120} /> : <IconPhoto style={{ width: rem(52), height: rem(52), color: "var(--mantine-color-dimmed)" }} stroke={1.5} />}
                </Dropzone.Idle>
 
                <div>

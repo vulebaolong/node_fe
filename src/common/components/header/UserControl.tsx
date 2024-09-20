@@ -1,8 +1,9 @@
-import { Avatar, Badge, Group, Menu, Text } from "@mantine/core";
+import { Group, Menu, Text } from "@mantine/core";
 import { effectText } from "../../../helpers/motion.helper";
-import classes from "./Header.module.css";
 import { useAppSelector } from "../../../store/store";
-import { checkPathAvatar } from "../../../helpers/function.helper";
+import { Avatar } from "../avatar/Avatar";
+import { Badge } from "../badge/Badge";
+import classes from "./Header.module.css";
 
 export default function UserControl() {
    const { info } = useAppSelector((state) => state.user);
@@ -10,7 +11,7 @@ export default function UserControl() {
    return (
       <Menu shadow="md" width={200}>
          <Menu.Target>
-            <Avatar style={{ cursor: `pointer` }} src={checkPathAvatar(info?.avatar)} alt="it's me" />
+            <Avatar style={{ cursor: `pointer` }} user={info} />
          </Menu.Target>
 
          <Menu.Dropdown>
@@ -35,9 +36,7 @@ export default function UserControl() {
                   Role
                </Text>
 
-               <Badge variant="outline" color={info?.role_id === 2 ? `red` : `blue`}>
-                  {effectText(info?.roles.name || ``)}
-               </Badge>
+               <Badge user={info} />
             </Group>
 
             {/* <Menu.Divider /> */}

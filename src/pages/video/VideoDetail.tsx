@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Group, Stack, Text, Title } from "@mantine/core";
+import { Box, Button, Group, Stack, Text, Title } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
 import {
    IconThumbDown,
@@ -22,6 +22,7 @@ import CommentVideo from "./comment/CommentVideo";
 import { toast } from "react-toastify";
 import { useQueryClient } from "@tanstack/react-query";
 import { checkPathAvatar } from "../../helpers/function.helper";
+import { Avatar } from "../../common/components/avatar/Avatar";
 
 export default function VideoDetail() {
    const [lineClamp, toggleLineClamp] = useToggle([3, 0]);
@@ -106,7 +107,7 @@ export default function VideoDetail() {
             </Title>
 
             <Group>
-               <Avatar src={checkPathAvatar(videoDetail.data?.users?.avatar)} alt="avatar" />
+               <Avatar user={videoDetail.data?.users} />
                <Text fz="lg" fw={500} truncate="end">
                   {videoDetail.data?.users.full_name}
                </Text>
