@@ -6,15 +6,14 @@ import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useCreateChat } from "../../common/api/tanstack/chat.tanstack";
 import { useGetUserList } from "../../common/api/tanstack/user.tanstack";
+import { Avatar } from "../../common/components/avatar/Avatar";
 import Nodata from "../../common/components/no-data/Nodata";
 import { useIsMobile } from "../../common/hooks/is-mobile.hooks";
 import { BASE_DOMAIN_API, isProduction } from "../../constant/app.constant";
-import { checkPathAvatar } from "../../helpers/function.helper";
 import { useAppSelector } from "../../store/store";
 import { TListChatRes } from "../../types/chat.type";
 import { TUserListRes } from "../../types/user.type";
 import classes from "./Chat.module.css";
-import { Avatar } from "../../common/components/avatar/Avatar";
 
 export default function Chat() {
    const bottomRef = useRef<HTMLDivElement>(null);
