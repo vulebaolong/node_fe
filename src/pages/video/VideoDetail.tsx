@@ -12,8 +12,6 @@ import Nodata from "../../common/components/no-data/Nodata";
 import classes from "./Video.module.css";
 import CommentVideo from "./comment/CommentVideo";
 
-const abc = ``;
-
 export default function VideoDetail() {
    const [lineClamp, toggleLineClamp] = useToggle([3, 0]);
    const { videoId } = useParams();
