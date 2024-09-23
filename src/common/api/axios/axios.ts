@@ -1,15 +1,17 @@
 import axios from "axios";
 import { ACCESS_TOKEN, BASE_DOMAIN_API } from "../../../constant/app.constant";
 import { ENDPOINT } from "../../../constant/endpoint.constant";
-import {
-   getAccessToken,
-   getRefreshToken,
-   logOut,
-   setAccessToken,
-   setRefreshToken,
-} from "../../../helpers/auth.helper";
+import { getAccessToken, getRefreshToken, logOut, setAccessToken, setRefreshToken } from "../../../helpers/auth.helper";
 
 const api = axios.create({
+   baseURL: BASE_DOMAIN_API,
+   headers: {
+      "Content-Type": "application/json",
+      "Accept-Language": "en-US,en;q=0.5",
+   },
+});
+
+const apiRefreshToken = axios.create({
    baseURL: BASE_DOMAIN_API,
    headers: {
       "Content-Type": "application/json",
@@ -77,10 +79,16 @@ api.interceptors.response.use(
             const refreshToken = getRefreshToken();
             const accessToken = getAccessToken();
 
-            const { data } = await api.post(`${ENDPOINT.AUTH.REFRESH_TOKEN()}`, {
-               refreshToken,
-               accessToken,
-            });
+            const { data } = await apiRefreshToken.post(
+               `${ENDPOINT.AUTH.REFRESH_TOKEN()}`,
+               {},
+               {
+                  headers: {
+                     "x-access-token": accessToken,
+                     "Authorization": `Bearer ${refreshToken}`,
+                  },
+               }
+            );
 
             setRefreshToken(data.metaData.refreshToken);
             setAccessToken(data.metaData.accessToken);
