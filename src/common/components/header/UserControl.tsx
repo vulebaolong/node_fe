@@ -1,18 +1,15 @@
 import { Group, Menu, Text } from "@mantine/core";
 import { effectText } from "../../../helpers/motion.helper";
 import { useAppSelector } from "../../../store/store";
-import { Avatar } from "../avatar/Avatar";
 import { Badge } from "../badge/Badge";
 import classes from "./Header.module.css";
+import { Avatar } from "../avatar/Avatar";
 
 export default function UserControl() {
    const { info } = useAppSelector((state) => state.user);
-
    return (
       <Menu shadow="md" width={200}>
-         <Menu.Target>
-            <Avatar style={{ cursor: `pointer` }} user={info} />
-         </Menu.Target>
+         <Menu.Target>{<Avatar style={{ cursor: `pointer` }} user={info} />}</Menu.Target>
 
          <Menu.Dropdown>
             <Group gap={0} className={classes.textAvatar} wrap="nowrap">

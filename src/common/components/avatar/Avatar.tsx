@@ -7,10 +7,10 @@ type TProps = {
    user?: TUser | null;
 } & AvatarProps;
 
-export const Avatar = forwardRef<HTMLDivElement, TProps & React.ComponentPropsWithoutRef<"div">>(({ user, ...props }, ref) => {
+export const Avatar = forwardRef<HTMLDivElement, TProps & React.ComponentPropsWithoutRef<"div">>(({ user, style, ...props }, ref) => {
    return (
       <AvatarMantine
-         style={{ outline: user?.role_id === 2 ? `2px solid var(--mantine-color-red-filled)` : `unset` }}
+         style={{ outline: user?.role_id === 2 ? `2px solid var(--mantine-color-red-filled)` : `unset`, ...style }}
          {...props}
          ref={ref}
          alt="avatar"
