@@ -24,7 +24,7 @@ export const useVideoList = ({ page, pageSize, typeId, search }: TUseVideoList) 
       queryKey: [`video-list`, page, pageSize, typeId, search],
       queryFn: async () => {
          const { data } = await api.get<TResPagination<TVideo[]>>(
-            `${ENDPOINT.VIDEO.VIDEO_LIST()}?page=${page}&pageSize=${pageSize}&type_id=[${typeId}]&search=${search}`
+            `${ENDPOINT.VIDEO.VIDEO_LIST()}?page=${page}&pageSize=${pageSize}&type_id=${typeId}&search=${search}`
          );
          return data.metaData;
       },
