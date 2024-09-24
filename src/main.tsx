@@ -24,6 +24,7 @@ console.log({
    "import.meta.env.VITE_BASE_DOMAIN_API": import.meta.env.VITE_BASE_DOMAIN_API,
 });
 
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
    <Provider>
       <App />
