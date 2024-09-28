@@ -6,8 +6,7 @@ import { Logo } from "../logo/Logo";
 import classes from "./Nav.module.css";
 import { ROUTER } from "../../../constant/router.constant";
 import { logOut } from "../../../helpers/auth.helper";
-
-
+import { TITLE_BASE } from "../../../constant/app.constant";
 
 const LIST_NAV = [
    { link: ROUTER.HOME, label: "Home", icon: Icons.IconHome },
@@ -37,7 +36,7 @@ export function Nav({ close }: TProps) {
                <Group gap={`5px`}>
                   <Logo color="white" />
                   <Title order={4} c={`white`}>
-                     JSM Media
+                     {TITLE_BASE}
                   </Title>
                </Group>
                <Code fw={700} className={classes.version}>
@@ -51,9 +50,7 @@ export function Nav({ close }: TProps) {
                   <NavLink
                      key={i}
                      to={item.link}
-                     className={({ isActive }) =>
-                        isActive ? `${classes.buttonNav} ${classes.active}` : `${classes.buttonNav}`
-                     }
+                     className={({ isActive }) => (isActive ? `${classes.buttonNav} ${classes.active}` : `${classes.buttonNav}`)}
                      onClick={() => {
                         if (close) close();
                      }}

@@ -1,4 +1,4 @@
-import { Button, NumberInput, Paper, Stack, Title } from "@mantine/core";
+import { Button, NumberInput, Paper, Stack, Text, Title } from "@mantine/core";
 import { IconCoin } from "@tabler/icons-react";
 import { usePayMomo } from "../../common/api/tanstack/payment.tanstack";
 import { useState } from "react";
@@ -35,6 +35,7 @@ export default function Payment() {
                }}
                thousandSeparator=" "
             />
+            <Text>Thuốc trị đau nhức xương khớp gia truyền 3 đời</Text>
             <Button loading={payMomo.isPending} disabled={payMomo.isPending} onClick={handlePay}>
                Pay
             </Button>
