@@ -13,4 +13,4 @@ export const MOBILE_HIDDEN_DESKTOP_VISIBLE = `mantine-visible-from-md`;
 export const ACCESS_TOKEN = `ACCESS_TOKEN`;
 export const REFRESH_TOKEN = `REFRESH_TOKEN`;
 
-export const TITLE_BASE = `LONG Media`;
+export const TITLE_BASE = `Cyber Media`;
