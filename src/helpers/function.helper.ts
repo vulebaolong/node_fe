@@ -1,4 +1,5 @@
-import { BASE_DOMAIN_API, BASE_DOMAIN_CLOUDINARY, FOLDER_IMAGE_BE } from "../constant/app.constant";
+import dayjs from "dayjs";
+import { BASE_DOMAIN_API, BASE_DOMAIN_CLOUDINARY, FOLDER_IMAGE_BE, TIMEOUT_SEND_MAIL } from "../constant/app.constant";
 
 export const resError = (error: any, defaultMes: string) => {
    let mes = error.response?.data?.message;
@@ -22,4 +23,31 @@ export const checkPathAvatar = (path: string | null | undefined) => {
    } else {
       return `${BASE_DOMAIN_CLOUDINARY}${path}`;
    }
+};
+
+type TStartCountdown = {
+   expirationTime: number;
+   handler: (count: number) => void;
+   end: () => void;
+};
+let countdownInterval: number | undefined = undefined; // Biến để lưu trữ interval
+
+export const startCountdown = ({ expirationTime, handler, end }: TStartCountdown) => {
+   if (countdownInterval) return;
+
+   localStorage.setItem(TIMEOUT_SEND_MAIL, `${expirationTime}`);
+
+   countdownInterval = setInterval(() => {
+      const now = dayjs().valueOf();
+      const diff = expirationTime - now;
+
+      if (diff <= 0) {
+         clearInterval(countdownInterval);
+         countdownInterval = undefined;
+         localStorage.removeItem(TIMEOUT_SEND_MAIL);
+         end();
+      } else {
+         handler(Math.floor(diff / 1000));
+      }
+   }, 1000);
 };

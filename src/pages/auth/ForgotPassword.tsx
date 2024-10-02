@@ -18,18 +18,19 @@ import {
 import { useInterval } from "@mantine/hooks";
 import { IconArrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Logo } from "../../common/components/logo/Logo";
 import { ROUTER } from "../../constant/router.constant";
 import rootRouter from "../../routes/rootRouter";
 import CustomPasswordInput from "../../common/components/password-input/CustomPasswordInput";
 import { useResetPassword, useSendEmail } from "../../common/api/tanstack/auth.tanstack";
-import { resError } from "../../helpers/function.helper";
+import { resError, startCountdown } from "../../helpers/function.helper";
 import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import { TIMEOUT_SEND_MAIL } from "../../constant/app.constant";
 
-const timeStop = 0;
-const timeStart = 61;
+const timeStart = 60;
 
 export default function ForgotPassword() {
    const [step, setStep] = useState(1);
@@ -37,18 +38,31 @@ export default function ForgotPassword() {
    const sendEmail = useSendEmail();
    const resetPassword = useResetPassword();
 
-   const initTime = localStorage.getItem(`TIMEOUT_SEND_MAIL`);
-   const [seconds, setSeconds] = useState(initTime ? Number(initTime) : timeStart);
-   const interval = useInterval(() => setSeconds(intervalFn), 1000, { autoInvoke: !!initTime });
-   const intervalFn = (s: number) => {
-      localStorage.setItem(`TIMEOUT_SEND_MAIL`, `${s - 1}`);
-      if (s <= timeStop) {
-         interval.stop();
-         localStorage.removeItem(`TIMEOUT_SEND_MAIL`);
-         return timeStart;
+   const savedTime = localStorage.getItem(TIMEOUT_SEND_MAIL);
+   const [count, setCount] = useState(savedTime ? Math.floor((Number(savedTime) - dayjs().valueOf()) / 1000) : 0);
+
+   useEffect(() => {
+      if (savedTime) {
+         const expirationTime = parseInt(savedTime, 10);
+         const now = dayjs().valueOf();
+
+         if (now < expirationTime) {
+            startCountdown({
+               expirationTime,
+               handler: (count) => {
+                  setCount(() => {
+                     return count;
+                  });
+               },
+               end: () => {
+                  setCount(0);
+               },
+            });
+         } else {
+            localStorage.removeItem(TIMEOUT_SEND_MAIL);
+         }
       }
-      return s - 1;
-   };
+   }, []);
 
    const forgotPasswordForm1 = useFormik({
       initialValues: {
@@ -61,17 +75,27 @@ export default function ForgotPassword() {
          const payload = {
             email: valuesRaw.email.trim(),
          };
-         interval.start();
+         // interval.start();
          sendEmail.mutate(payload, {
             onSuccess: () => {
                setStep(2);
                toast.success(`Send code to email successfully`);
+
+               const expirationTime = dayjs().add(timeStart, "seconds").valueOf();
+               startCountdown({
+                  expirationTime,
+                  handler: (count) => {
+                     setCount(() => {
+                        return count;
+                     });
+                  },
+                  end: () => {
+                     setCount(0);
+                  },
+               });
             },
             onError: (error) => {
                console.log(error);
-               setSeconds(timeStart);
-               interval.stop();
-               localStorage.removeItem(`TIMEOUT_SEND_MAIL`);
                toast.error(resError(error, "Sending Code to email failed."));
             },
          });
@@ -157,12 +181,9 @@ export default function ForgotPassword() {
                </Anchor>
                <Group>
                   <Button
-                     leftSection={
-                        seconds <= 60 ? (
-                           <Text w={`25px`}>{seconds.toString().padStart(2, "0")}</Text>
-                        ) : undefined
-                     }
-                     disabled={seconds <= 60}
+                     leftSection={count > 0 ? <Text w={`25px`}>{count.toString().padStart(2, "0")}</Text> : undefined}
+                     disabled={count > 0}
+                     loading={sendEmail.isPending}
                      type="submit"
                      w={`140px`}
                   >
@@ -237,9 +258,7 @@ export default function ForgotPassword() {
                name="rePassword"
                value={forgotPasswordForm2.values.rePassword}
                onChange={forgotPasswordForm2.handleChange}
-               error={
-                  forgotPasswordForm2.touched.rePassword && forgotPasswordForm2.errors.rePassword
-               }
+               error={forgotPasswordForm2.touched.rePassword && forgotPasswordForm2.errors.rePassword}
                inputWrapperOrder={["label", "input", "error"]}
                style={{ height: `90px` }}
             />
@@ -257,7 +276,9 @@ export default function ForgotPassword() {
                      <Box ml={5}>Back to send email</Box>
                   </Center>
                </Anchor>
-               <Button type="submit">Reset password</Button>
+               <Button type="submit" loading={resetPassword.isPending}>
+                  Reset password
+               </Button>
             </Group>
          </Stack>
       );
@@ -268,11 +289,7 @@ export default function ForgotPassword() {
          <Center>
             <Logo />
          </Center>
-         <Title
-            mt={20}
-            ta="center"
-            style={{ fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}
-         >
+         <Title mt={20} ta="center" style={{ fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}>
             Forgot your password?
          </Title>
 
@@ -281,23 +298,11 @@ export default function ForgotPassword() {
          </Text>
 
          <Paper withBorder shadow="md" p={30} mt={30} radius="md" style={{ overflow: `hidden` }}>
-            <Transition
-               enterDelay={400}
-               mounted={step === 1}
-               transition="slide-right"
-               duration={400}
-               timingFunction="ease"
-            >
+            <Transition enterDelay={400} mounted={step === 1} transition="slide-right" duration={400} timingFunction="ease">
                {(styles) => <div style={styles}>{renderStep1()}</div>}
             </Transition>
 
-            <Transition
-               enterDelay={400}
-               mounted={step === 2}
-               transition="slide-right"
-               duration={400}
-               timingFunction="ease"
-            >
+            <Transition enterDelay={400} mounted={step === 2} transition="slide-right" duration={400} timingFunction="ease">
                {(styles) => <div style={styles}>{renderStep2()}</div>}
             </Transition>
          </Paper>
