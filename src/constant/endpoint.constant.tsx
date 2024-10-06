@@ -10,6 +10,12 @@ export const ENDPOINT = {
       RESET_PASSWORD: () => `${ENDPOINT.AUTH.BASE}/reset-password`,
       SEND_EMAIL: () => `${ENDPOINT.AUTH.BASE}/send-email`,
    },
+   TWO_FA: {
+      BASE: `two-fa`,
+      CHECK_2FA_BEFORE_LOGIN: () => `${ENDPOINT.TWO_FA.BASE}/check-2fa-before-login`,
+      ON_OFF_2FA: () => `${ENDPOINT.TWO_FA.BASE}/on-off-2fa`,
+      GET_QR_2FA: () => `${ENDPOINT.TWO_FA.BASE}/get-qr`,
+   },
    VIDEO: {
       BASE: `video`,
       VIDEO_LIST: () => `${ENDPOINT.VIDEO.BASE}/video-list`,
@@ -21,6 +27,10 @@ export const ENDPOINT = {
       VIDEO_DISLIKE: () => `${ENDPOINT.VIDEO.BASE}/video-dislike`,
       VIDEO_GET_LIKE: () => `${ENDPOINT.VIDEO.BASE}/video-like`,
       VIDEO_GET_TOAL_LIKE: () => `${ENDPOINT.VIDEO.BASE}/video-total-like`,
+   },
+   SESSION_LOGIN: {
+      LIST: `session-login/`,
+      LOGOUT_DEVICE: `session-login/logout-device`,
    },
    CHAT: {
       BASE: (id = "") => `/chat/${id}`,

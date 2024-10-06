@@ -1,6 +1,6 @@
 .navbar {
    background-color: var(--mantine-color-blue-filled);
-   height: 100vh;
+   height: 100dvh;
    width: mobile-desktop(100% = var(--width-nav));
 }
 

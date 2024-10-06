@@ -2,20 +2,12 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { ENDPOINT } from "../../../constant/endpoint.constant";
 import { ROUTER } from "../../../constant/router.constant";
-import {
-   getAccessToken
-} from "../../../helpers/auth.helper";
+import { getAccessToken } from "../../../helpers/auth.helper";
 import { resError } from "../../../helpers/function.helper";
 import rootRouter from "../../../routes/rootRouter";
 import { TRes } from "../../../types/app.type";
 import { TLoginFacebookReq } from "../../../types/facebook.type";
-import {
-   TLoginReq,
-   TLoginRes,
-   TRegisterReq,
-   TResetPasswordReq,
-   TSendEmailReq
-} from "../../../types/user.type";
+import { TLoginReq, TLoginRes, TRegisterReq, TResetPasswordReq, TSendEmailReq } from "../../../types/user.type";
 import api from "../axios/axios";
 
 export const useRegister = () => {
@@ -94,6 +86,33 @@ export const useSendEmail = () => {
    return useMutation({
       mutationFn: async (payload: TSendEmailReq) => {
          const { data } = await api.post<TRes<any>>(ENDPOINT.AUTH.SEND_EMAIL(), payload);
+         return data;
+      },
+   });
+};
+
+export const useCheck2FaBeforeLogin = () => {
+   return useMutation({
+      mutationFn: async (email: string) => {
+         const { data } = await api.get<TRes<boolean>>(`${ENDPOINT.TWO_FA.CHECK_2FA_BEFORE_LOGIN()}?email=${email}`);
+         return data.metaData;
+      },
+   });
+};
+
+export const useOnOff2Fa = () => {
+   return useMutation({
+      mutationFn: async () => {
+         const { data } = await api.patch<TRes<boolean>>(`${ENDPOINT.TWO_FA.ON_OFF_2FA()}`);
+         return data;
+      },
+   });
+};
+
+export const useGetQr2Fa = () => {
+   return useMutation({
+      mutationFn: async () => {
+         const { data } = await api.get<TRes<{ qrCode: string }>>(`${ENDPOINT.TWO_FA.GET_QR_2FA()}`);
          return data;
       },
    });

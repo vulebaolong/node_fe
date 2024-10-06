@@ -1,7 +1,7 @@
 import axios from "axios";
-import { ACCESS_TOKEN, BASE_DOMAIN_API } from "../../../constant/app.constant";
+import { BASE_DOMAIN_API } from "../../../constant/app.constant";
 import { ENDPOINT } from "../../../constant/endpoint.constant";
-import { getAccessToken, getRefreshToken, logOut, setAccessToken, setRefreshToken } from "../../../helpers/auth.helper";
+import { getAccessToken, getRefreshToken, getDeviceId, logOut, setAccessToken, setRefreshToken } from "../../../helpers/auth.helper";
 
 const api = axios.create({
    baseURL: BASE_DOMAIN_API,
@@ -23,9 +23,11 @@ api.interceptors.request.use(
    function (config) {
       config.url = `${api.defaults.baseURL}${config.url}`;
 
-      const token = localStorage.getItem(ACCESS_TOKEN);
+      const accessToken = getAccessToken();
+      if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
 
-      if (token) config.headers.Authorization = `Bearer ${token}`;
+      const deviceId = getDeviceId();
+      if (deviceId) config.headers[`device-id`] = `${deviceId}`;
 
       return config;
    },

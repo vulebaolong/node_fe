@@ -1,0 +1,6 @@
+.one {
+   padding: 10px 20px;
+   box-shadow: light-dark(rgba(149, 157, 165, 0.2) 0px 8px 24px, rgba(86, 89, 92, 0.2) 0px 8px 24px);
+   border-radius: 10px;
+   background-color: light-dark(light, var(--mantine-color-dark-5));
+}

@@ -31,6 +31,7 @@ export function Profile() {
          onSuccess: () => {
             toast.success(`Upload avatar to local successfully`);
             dispatch(getInfo());
+            setPreview(null);
          },
          onError: (err) => {
             toast.error(resError(err, `Upload avatar to local failed`));
@@ -51,6 +52,7 @@ export function Profile() {
          onSuccess: () => {
             toast.success(`Upload avatar to cloud successfully`);
             dispatch(getInfo());
+            setPreview(null);
          },
          onError: (err) => {
             toast.error(resError(err, `Upload avatar to cloud failed`));
@@ -99,7 +101,11 @@ export function Profile() {
                   <IconX style={{ width: rem(52), height: rem(52), color: "var(--mantine-color-red-6)" }} stroke={1.5} />
                </Dropzone.Reject>
                <Dropzone.Idle>
-                  {preview ? <AvatarMantine src={preview} size={120} /> : <IconPhoto style={{ width: rem(52), height: rem(52), color: "var(--mantine-color-dimmed)" }} stroke={1.5} />}
+                  {preview ? (
+                     <AvatarMantine src={preview} size={120} />
+                  ) : (
+                     <IconPhoto style={{ width: rem(52), height: rem(52), color: "var(--mantine-color-dimmed)" }} stroke={1.5} />
+                  )}
                </Dropzone.Idle>
 
                <div>

@@ -1,0 +1,26 @@
+.one {
+   padding: 10px 20px;
+   box-shadow: light-dark(rgba(149, 157, 165, 0.2) 0px 8px 24px, rgba(86, 89, 92, 0.2) 0px 8px 24px);
+   border-radius: 10px;
+   background-color: light-dark(light, var(--mantine-color-dark-5));
+}
+
+.wrapLogged {
+   border-radius: 10px;
+   outline: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-3));
+}
+
+.textDeviceName {
+   font-size: mobile-desktop(var(--mantine-font-size-xs) = var(--mantine-font-size-sm));
+   width: mobile-desktop(100px = 200px);
+}
+
+.textUpdatedAt {
+   font-size: mobile-desktop(var(--mantine-font-size-xs) = var(--mantine-font-size-sm));
+   width: mobile-desktop(100px = 200px);
+}
+
+.iconDevice {
+   width: mobile-desktop(20px = 20px);
+   height: mobile-desktop(20px = 20px);
+}

@@ -1,68 +1,28 @@
-import {
-   ActionIcon,
-   Anchor,
-   Box,
-   Button,
-   Center,
-   Container,
-   Group,
-   Paper,
-   PinInput,
-   rem,
-   Stack,
-   Text,
-   TextInput,
-   Title,
-   Transition,
-} from "@mantine/core";
-import { useInterval } from "@mantine/hooks";
+import { ActionIcon, Anchor, Box, Button, Center, Group, Paper, PinInput, rem, Stack, Text, TextInput, Title, Transition } from "@mantine/core";
 import { IconArrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
-import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import * as Yup from "yup";
-import { Logo } from "../../common/components/logo/Logo";
-import { ROUTER } from "../../constant/router.constant";
-import rootRouter from "../../routes/rootRouter";
-import CustomPasswordInput from "../../common/components/password-input/CustomPasswordInput";
-import { useResetPassword, useSendEmail } from "../../common/api/tanstack/auth.tanstack";
-import { resError, startCountdown } from "../../helpers/function.helper";
-import { toast } from "react-toastify";
 import dayjs from "dayjs";
+import { useFormik } from "formik";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import * as Yup from "yup";
+import { useResetPassword, useSendEmail } from "../../common/api/tanstack/auth.tanstack";
+import { Logo } from "../../common/components/logo/Logo";
+import CustomPasswordInput from "../../common/components/password-input/CustomPasswordInput";
+import { useCountdown } from "../../common/hooks/count-down.hooks";
 import { TIMEOUT_SEND_MAIL } from "../../constant/app.constant";
+import { ROUTER } from "../../constant/router.constant";
+import { resError } from "../../helpers/function.helper";
+import rootRouter from "../../routes/rootRouter";
+import classes from "./Auth.module.css";
 
 const timeStart = 60;
 
 export default function ForgotPassword() {
    const [step, setStep] = useState(1);
+   const { timeLeft, startCountdown } = useCountdown(timeStart, 0, "ForgotPassword");
 
    const sendEmail = useSendEmail();
    const resetPassword = useResetPassword();
-
-   const savedTime = localStorage.getItem(TIMEOUT_SEND_MAIL);
-   const [count, setCount] = useState(savedTime ? Math.floor((Number(savedTime) - dayjs().valueOf()) / 1000) : 0);
-
-   useEffect(() => {
-      if (savedTime) {
-         const expirationTime = parseInt(savedTime, 10);
-         const now = dayjs().valueOf();
-
-         if (now < expirationTime) {
-            startCountdown({
-               expirationTime,
-               handler: (count) => {
-                  setCount(() => {
-                     return count;
-                  });
-               },
-               end: () => {
-                  setCount(0);
-               },
-            });
-         } else {
-            localStorage.removeItem(TIMEOUT_SEND_MAIL);
-         }
-      }
-   }, []);
 
    const forgotPasswordForm1 = useFormik({
       initialValues: {
@@ -75,24 +35,12 @@ export default function ForgotPassword() {
          const payload = {
             email: valuesRaw.email.trim(),
          };
-         // interval.start();
+
          sendEmail.mutate(payload, {
             onSuccess: () => {
                setStep(2);
                toast.success(`Send code to email successfully`);
-
-               const expirationTime = dayjs().add(timeStart, "seconds").valueOf();
-               startCountdown({
-                  expirationTime,
-                  handler: (count) => {
-                     setCount(() => {
-                        return count;
-                     });
-                  },
-                  end: () => {
-                     setCount(0);
-                  },
-               });
+               startCountdown();
             },
             onError: (error) => {
                console.log(error);
@@ -166,7 +114,7 @@ export default function ForgotPassword() {
                   style={{ height: `90px` }}
                />
             </Box>
-            <Group justify="space-between">
+            <Group justify="space-between" wrap="nowrap">
                <Anchor
                   onClick={() => {
                      rootRouter.navigate(ROUTER.LOGIN);
@@ -176,13 +124,13 @@ export default function ForgotPassword() {
                >
                   <Center inline>
                      <IconArrowLeft style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
-                     <Box ml={5}>Back to login</Box>
+                     <Box ml={5}>Back</Box>
                   </Center>
                </Anchor>
-               <Group>
+               <Group wrap="nowrap">
                   <Button
-                     leftSection={count > 0 ? <Text w={`25px`}>{count.toString().padStart(2, "0")}</Text> : undefined}
-                     disabled={count > 0}
+                     leftSection={timeLeft > 0 ? <Text w={`25px`}>{timeLeft.toString().padStart(2, "0")}</Text> : undefined}
+                     disabled={timeLeft > 0}
                      loading={sendEmail.isPending}
                      type="submit"
                      w={`140px`}
@@ -285,27 +233,34 @@ export default function ForgotPassword() {
    };
 
    return (
-      <Container size={420} style={{ paddingTop: `20vh`, animation: "fadeInUp 0.5s" }}>
-         <Center>
-            <Logo />
-         </Center>
-         <Title mt={20} ta="center" style={{ fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}>
-            Forgot your password?
-         </Title>
+      <Stack h={`100dvh`} justify="center" align="center">
+         <Box
+            className={`${classes.wrapForm}`}
+            style={{ animation: "fadeInUp 0.5s", height: step === 1 ? `350px` : `530px`, transition: `all .8s` }}
+            px={`md`}
+         >
+            <Center>
+               <Logo />
+            </Center>
 
-         <Text c="dimmed" fz="sm" ta="center">
-            Enter your email to get a reset link
-         </Text>
+            <Title mt={20} ta="center" style={{ width: `100%`, fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}>
+               Forgot Password
+            </Title>
 
-         <Paper withBorder shadow="md" p={30} mt={30} radius="md" style={{ overflow: `hidden` }}>
-            <Transition enterDelay={400} mounted={step === 1} transition="slide-right" duration={400} timingFunction="ease">
-               {(styles) => <div style={styles}>{renderStep1()}</div>}
-            </Transition>
+            <Text c="dimmed" fz="sm" ta="center">
+               Enter your email to get a reset link
+            </Text>
 
-            <Transition enterDelay={400} mounted={step === 2} transition="slide-right" duration={400} timingFunction="ease">
-               {(styles) => <div style={styles}>{renderStep2()}</div>}
-            </Transition>
-         </Paper>
-      </Container>
+            <Paper withBorder shadow="md" p={20} mt={30} radius="md" style={{ overflow: `hidden` }}>
+               <Transition enterDelay={400} mounted={step === 1} transition="slide-right" duration={400} timingFunction="ease">
+                  {(styles) => <div style={styles}>{renderStep1()}</div>}
+               </Transition>
+
+               <Transition enterDelay={400} mounted={step === 2} transition="slide-right" duration={400} timingFunction="ease">
+                  {(styles) => <div style={styles}>{renderStep2()}</div>}
+               </Transition>
+            </Paper>
+         </Box>
+      </Stack>
    );
 }

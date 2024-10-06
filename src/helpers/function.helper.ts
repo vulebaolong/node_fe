@@ -30,7 +30,7 @@ type TStartCountdown = {
    handler: (count: number) => void;
    end: () => void;
 };
-let countdownInterval: number | undefined = undefined; // Biến để lưu trữ interval
+let countdownInterval: NodeJS.Timeout | undefined = undefined; // Biến để lưu trữ interval
 
 export const startCountdown = ({ expirationTime, handler, end }: TStartCountdown) => {
    if (countdownInterval) return;
@@ -40,6 +40,7 @@ export const startCountdown = ({ expirationTime, handler, end }: TStartCountdown
    countdownInterval = setInterval(() => {
       const now = dayjs().valueOf();
       const diff = expirationTime - now;
+      console.log(`interval`);
 
       if (diff <= 0) {
          clearInterval(countdownInterval);

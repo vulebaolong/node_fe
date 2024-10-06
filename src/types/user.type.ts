@@ -10,10 +10,12 @@ export type TRegisterReq = {
 export type TLoginReq = {
    email: string;
    pass_word: string;
+   token?: string;
 };
 export type TLoginRes = {
    accessToken: string;
    refreshToken: string;
+   deviceId: string;
 };
 
 export type TUser = {
@@ -25,9 +27,25 @@ export type TUser = {
    google_id: string | null;
    role_id: number;
    refresh_token: string | null;
-   created_at: string
-   update_at: string
-   roles: TListRoleRes
+   created_at: string;
+   update_at: string;
+   roles: TListRoleRes;
+   session_login: TSessionLogin[] | [];
+   two_fa: TTwoFa | null;
+};
+
+export type TSessionLogin = {
+   session_login_id: number;
+   device_name: string;
+   is_active: boolean;
+   created_at: string;
+   update_at: string;
+};
+
+export type TTwoFa = {
+   is_2fa_enabled: boolean;
+   created_at: string;
+   update_at: string;
 };
 
 export type TUserListRes = {

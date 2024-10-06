@@ -1,6 +1,6 @@
 .one {
    width: 100vw;
-   height: 100vh;
+   height: 100dvh;
    position: relative;
    display: grid;
    grid-template-columns: mobile-desktop(1fr = auto 1fr);

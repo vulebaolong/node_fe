@@ -1,4 +1,18 @@
-import { ActionIcon, Badge, Box, Group, Indicator, Loader, Pagination, rem, Select, Stack, Text, TextInput, Loader as LoaderMantine } from "@mantine/core";
+import {
+   ActionIcon,
+   Badge,
+   Box,
+   Group,
+   Indicator,
+   Loader,
+   Pagination,
+   rem,
+   Select,
+   Stack,
+   Text,
+   TextInput,
+   Loader as LoaderMantine,
+} from "@mantine/core";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
@@ -75,7 +89,7 @@ export default function Role() {
    };
 
    return (
-      <Box className={`${classes.wrap}`}>
+      <Box>
          <TextInput
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                const value = event.currentTarget.value;
@@ -108,8 +122,9 @@ export default function Role() {
                gap: `10px`,
             }}
          >
-            <Box style={{ width: `80px` }}>
+            <Box style={{ width: `65px` }}>
                <Select
+                  size="xs"
                   value={`${pagination.pageSize}`}
                   onChange={(value) => {
                      if (value === null) return;
@@ -126,6 +141,8 @@ export default function Role() {
             </Box>
 
             <Pagination
+               radius={`md`}
+               size={`sm`}
                disabled={listRole.isLoading}
                value={pagination.page}
                total={totalPage}

@@ -1,4 +1,4 @@
-import { ActionIcon, Box, Card, Image, Loader as LoaderMantine, Pagination, rem, Select, Text, TextInput, Title } from "@mantine/core";
+import { ActionIcon, Box, Card, Group, Image, Loader as LoaderMantine, Pagination, rem, Select, Text, TextInput, Title } from "@mantine/core";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
@@ -44,16 +44,16 @@ export default function Video() {
    const renderContent = () => {
       if (videoList.isLoading)
          return (
-            <Box mt={100}>
+            <Group h={`100%`}>
                <Loader />
-            </Box>
+            </Group>
          );
 
       if (!videoList.data?.items || videoList.data.items.length === 0 || videoList.isError)
          return (
-            <Box mt={100}>
+            <Group h={`100%`}>
                <Nodata />
-            </Box>
+            </Group>
          );
 
       return (
@@ -148,8 +148,9 @@ export default function Video() {
                gap: `10px`,
             }}
          >
-            <Box style={{ width: `80px` }}>
+            <Box style={{ width: `65px` }}>
                <Select
+                  size="xs"
                   value={`${pagination.pageSize}`}
                   onChange={(value) => {
                      if (value === null) return;
@@ -166,6 +167,8 @@ export default function Video() {
             </Box>
 
             <Pagination
+               radius={`md`}
+               size={`sm`}
                disabled={videoList.isLoading}
                value={pagination.page}
                total={totalPage}
