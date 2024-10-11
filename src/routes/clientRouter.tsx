@@ -11,6 +11,7 @@ import Setting from "../pages/setting/Setting";
 import { Users } from "../pages/users/Users";
 import Video from "../pages/video/Video";
 import VideoDetail from "../pages/video/VideoDetail";
+import VideoTest from "../pages/video/VideoTest";
 
 const clientRouter = [
    {
@@ -18,6 +19,14 @@ const clientRouter = [
       element: (
          <RootPage title="Home" protect>
             <Home />
+         </RootPage>
+      ),
+   },
+   {
+      path: ROUTER.VIDEO_TEST.LIST(),
+      element: (
+         <RootPage title="Video Test" protect>
+            <VideoTest />
          </RootPage>
       ),
    },

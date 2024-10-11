@@ -15,6 +15,15 @@ export const ROUTER = {
          return `${this.BASE}/${id}`;
       },
    },
+   VIDEO_TEST: {
+      BASE: `${BASE}video-test`,
+      LIST() {
+         return this.BASE;
+      },
+      DETAIL(id: number | string = ":videoId") {
+         return `${this.BASE}/${id}`;
+      },
+   },
    ROLE: {
       BASE: `${BASE}role`,
       LIST() {

@@ -9,7 +9,7 @@ export type TCreateChatRes = {
    user_id_sender: number;
    user_id_recipient: number;
    created_at: string;
-   update_at: string;
+   updated_at: string;
 };
 
 export type TListChatRes = TCreateChatRes

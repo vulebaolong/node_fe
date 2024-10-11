@@ -8,12 +8,13 @@ import { useOnOff2Fa } from "../../../common/api/tanstack/auth.tanstack";
 import { toast } from "react-toastify";
 import { getInfo } from "../../../store/slices/user/user.slice";
 import { resError } from "../../../helpers/function.helper";
+import { effectText } from "../../../helpers/motion.helper";
 
 export default function TwoFactorAuthentication() {
    const { info } = useAppSelector((state) => state.user);
    const [openedModalQr2Fa, handleModalQr2Fa] = useDisclosure(false);
    const onOff2Fa = useOnOff2Fa();
-   const dispatch = useAppDispatch()
+   const dispatch = useAppDispatch();
 
    const handleOnOff2Fa = () => {
       if (!info?.two_fa) {
@@ -38,9 +39,9 @@ export default function TwoFactorAuthentication() {
          <Box className={`${classes.one}`}>
             <Group wrap="nowrap" justify="space-between">
                <Box>
-                  <Title order={5}>Two-Factor Authentication</Title>
-                  <Text c={`dimmed`} size="xs">
-                     Extra protection layers for your acount when logging in on new devices
+                  <Title order={5}>{effectText(`Two-Factor Authentication`)}</Title>
+                  <Text c={`dimmed`} size="xs" component="div">
+                     {effectText(`Extra protection layers for your acount when logging in on new devices`)}
                   </Text>
                </Box>
                <Group wrap="nowrap" gap={2}>

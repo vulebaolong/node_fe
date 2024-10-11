@@ -5,7 +5,7 @@ export type TPermission = {
    method: string;
    module: string;
    created_at: string;
-   update_at: string;
+   updated_at: string;
 };
 
 export type TPermissionGroupByMoudleRes = {
@@ -17,5 +17,5 @@ export type TRolePermission = {
    role_id: number;
    permission_id: number;
    created_at: string;
-   update_at: string;
+   updated_at: string;
 };

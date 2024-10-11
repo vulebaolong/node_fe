@@ -55,7 +55,7 @@ export default function LoggedOut() {
                               {sessionLogin.device_name}
                            </Text>
                            <Text className={`${classes.textUpdatedAt}`} truncate c={`dimmed`}>
-                              {dayjs.utc(sessionLogin.update_at).local().fromNow()}
+                              {dayjs.utc(sessionLogin.updated_at).local().fromNow()}
                            </Text>
                         </Box>
                      </Group>

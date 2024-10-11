@@ -16,7 +16,7 @@
    right: 20px;
    padding: 20px;
    width: mobile-desktop(calc(100vw - 40px) = calc(100vw - var(--width-nav) - 40px));
-   height: 100px;
+   height: 60px;
    border-radius: 20px;
    box-shadow: light-dark(rgba(149, 157, 165, 0.5) 0px 8px 24px, var(--mantine-color-dark-8) 0px 8px 24px);
    background-color: light-dark(white, var(--mantine-color-dark-6));

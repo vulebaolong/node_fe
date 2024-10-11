@@ -1,6 +1,5 @@
 import { ActionIcon, Anchor, Box, Button, Center, Group, Paper, PinInput, rem, Stack, Text, TextInput, Title, Transition } from "@mantine/core";
 import { IconArrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
-import dayjs from "dayjs";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -9,7 +8,6 @@ import { useResetPassword, useSendEmail } from "../../common/api/tanstack/auth.t
 import { Logo } from "../../common/components/logo/Logo";
 import CustomPasswordInput from "../../common/components/password-input/CustomPasswordInput";
 import { useCountdown } from "../../common/hooks/count-down.hooks";
-import { TIMEOUT_SEND_MAIL } from "../../constant/app.constant";
 import { ROUTER } from "../../constant/router.constant";
 import { resError } from "../../helpers/function.helper";
 import rootRouter from "../../routes/rootRouter";

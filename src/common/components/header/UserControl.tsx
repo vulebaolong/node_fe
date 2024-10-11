@@ -13,24 +13,24 @@ export default function UserControl() {
 
          <Menu.Dropdown>
             <Group gap={0} className={classes.textAvatar} wrap="nowrap">
-               <Text className={classes.widthText} c="dimmed" size="xs">
-                  Name
+               <Text className={classes.widthText} c="dimmed" size="xs" component="div">
+                  {effectText(`Name`)}
                </Text>
-               <Text component="span" size="xs">
-                  {effectText(info?.full_name || ``)}
+               <Text component="span" size="xs" truncate="end">
+                  {info?.full_name}
                </Text>
             </Group>
             <Group gap={0} className={classes.textAvatar} wrap="nowrap">
-               <Text className={classes.widthText} c="dimmed" size="xs">
-                  Email
+               <Text className={classes.widthText} c="dimmed" size="xs" component="div">
+                  {effectText(`Email`)}
                </Text>
                <Text span size="xs" truncate="end">
-                  {effectText(info?.email || ``)}
+                  {info?.email}
                </Text>
             </Group>
             <Group gap={0} className={classes.textAvatar} wrap="nowrap">
-               <Text className={classes.widthText} c="dimmed" size="xs">
-                  Role
+               <Text className={classes.widthText} c="dimmed" size="xs" component="div">
+                  {effectText(`Role`)}
                </Text>
 
                <Badge user={info} />

@@ -34,6 +34,8 @@ export default function Video() {
       search,
    });
 
+   console.log(videoList.data);
+
    totalPage = videoList.data?.totalPage || totalPage;
 
    const handleClickCard = (video: TVideo) => {

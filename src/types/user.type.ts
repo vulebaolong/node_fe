@@ -28,7 +28,7 @@ export type TUser = {
    role_id: number;
    refresh_token: string | null;
    created_at: string;
-   update_at: string;
+   updated_at: string;
    roles: TListRoleRes;
    session_login: TSessionLogin[] | [];
    two_fa: TTwoFa | null;
@@ -39,13 +39,13 @@ export type TSessionLogin = {
    device_name: string;
    is_active: boolean;
    created_at: string;
-   update_at: string;
+   updated_at: string;
 };
 
 export type TTwoFa = {
    is_2fa_enabled: boolean;
    created_at: string;
-   update_at: string;
+   updated_at: string;
 };
 
 export type TUserListRes = {

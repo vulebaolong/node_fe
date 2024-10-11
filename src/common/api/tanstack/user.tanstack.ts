@@ -18,11 +18,11 @@ export const useGetUserList = ({ page, pageSize, search }: TGetUseList) => {
          const { data } = await api.get<TResPagination<TUserListRes[]>>(`${ENDPOINT.USER}?notMe=true&page=${page}&pageSize=${pageSize}&search=${search}`);
 
          data.metaData.items = data.metaData.items.map((user) => {
-            // Gom hai mảng lại và chọn update_at mới nhất
+            // Gom hai mảng lại và chọn updated_at mới nhất
             const combinedChats = _.concat(user.chats_chats_user_id_recipientTousers, user.chats_chats_user_id_senderTousers);
 
-            // Tìm tin nhắn có update_at mới nhất
-            const lastMessage = _.maxBy(combinedChats, "update_at");
+            // Tìm tin nhắn có updated_at mới nhất
+            const lastMessage = _.maxBy(combinedChats, "updated_at");
             delete user.chats_chats_user_id_recipientTousers;
             delete user.chats_chats_user_id_senderTousers;
             return {

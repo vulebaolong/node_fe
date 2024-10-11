@@ -4,6 +4,8 @@ export type TVideoType = {
    type_name: string;
    icon: string;
    type_id: number;
+   created_at: string;
+   updated_at: string;
 };
 
 export type TVideo = {
@@ -15,6 +17,8 @@ export type TVideo = {
    source: string;
    user_id: number;
    type_id: number;
+   created_at: string;
+   updated_at: string;
    users: TUser;
 };
 
@@ -29,7 +33,7 @@ export type TVideoCommentRes = {
    video: TVideo;
    content: string;
    created_at: string;
-   update_at: string;
+   updated_at: string;
 };
 
 export type TVideoLikeReq = {
@@ -43,5 +47,5 @@ export type TVideoGetLikeRes = {
    is_like: boolean;
    dis_like: boolean;
    created_at: string;
-   update_at: string;
+   updated_at: string;
 };
