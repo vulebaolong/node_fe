@@ -1,10 +1,8 @@
 import {
-   ActionIcon,
    Anchor,
    Box,
    Button,
    Center,
-   Container,
    Divider,
    Group,
    Paper,
@@ -14,9 +12,11 @@ import {
    Text,
    TextInput,
    Title,
-   Transition,
+   Transition
 } from "@mantine/core";
+import { IconArrowLeft } from "@tabler/icons-react";
 import { useFormik } from "formik";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useCheck2FaBeforeLogin, useLogin } from "../../common/api/tanstack/auth.tanstack";
@@ -30,10 +30,8 @@ import { resError } from "../../helpers/function.helper";
 import rootRouter from "../../routes/rootRouter";
 import { UPDATE_IS_LOGIN } from "../../store/slices/user/user.slice";
 import { useAppDispatch } from "../../store/store";
-import { TLoginReq, TLoginRes } from "../../types/user.type";
-import { useState } from "react";
-import { IconArrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import { TRes } from "../../types/app.type";
+import { TLoginReq, TLoginRes } from "../../types/user.type";
 import classes from "./Auth.module.css";
 
 export default function Login() {

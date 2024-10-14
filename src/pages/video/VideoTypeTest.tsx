@@ -1,6 +1,5 @@
-import { Button, Group, rem, Text } from "@mantine/core";
+import { Button, Group, rem } from "@mantine/core";
 import * as Icons from "@tabler/icons-react";
-import dayjs from "dayjs";
 import { useVideoTypeTest } from "../../common/api/tanstack/video.tantask";
 
 const LIST_VIDEO_TYPE = [

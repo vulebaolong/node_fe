@@ -1,4 +1,4 @@
-import { Box, Divider, Group, Pagination, Select, Stack, Text, Title } from "@mantine/core";
+import { Box, Divider, Group, Pagination, Select, Stack, Text } from "@mantine/core";
 import { IconDevicesOff } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { useState } from "react";

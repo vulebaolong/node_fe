@@ -1,10 +1,10 @@
-import { ActionIcon, Box, Center, Group, Image, Loader, Modal, Stack, Title } from "@mantine/core";
+import { ActionIcon, Box, Center, Image, Loader, Modal, Stack, Title } from "@mantine/core";
 import { IconScan, IconX } from "@tabler/icons-react";
+import { useEffect } from "react";
+import { getInfo } from "../../../../store/slices/user/user.slice";
+import { useAppDispatch } from "../../../../store/store";
 import { useGetQr2Fa } from "../../../api/tanstack/auth.tanstack";
 import Nodata from "../../no-data/Nodata";
-import { useEffect } from "react";
-import { useAppDispatch } from "../../../../store/store";
-import { getInfo } from "../../../../store/slices/user/user.slice";
 
 type TProps = {
    opened: boolean;

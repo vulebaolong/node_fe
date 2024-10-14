@@ -1,5 +1,4 @@
 import { Box, Card, Group, Image, Text, Title } from "@mantine/core";
-import { useState } from "react";
 import { useVideoListTest } from "../../common/api/tanstack/video.tantask";
 import { Avatar } from "../../common/components/avatar/Avatar";
 import Loader from "../../common/components/loader/Loader";
