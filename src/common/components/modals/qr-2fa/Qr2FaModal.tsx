@@ -60,7 +60,7 @@ export default function Qr2FaModal({ opened, close }: TProps) {
 
             <Box h={212}>{renderContent()}</Box>
 
-            <Center w={`100%`}>
+            <Center w={`100%`} mt={30}>
                <ActionIcon onClick={close} variant="default" radius="xl" aria-label="Settings">
                   <IconX style={{ width: "70%", height: "70%" }} stroke={1.5} />
                </ActionIcon>
