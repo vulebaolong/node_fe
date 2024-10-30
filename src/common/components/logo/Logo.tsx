@@ -1,4 +1,5 @@
 import { Box } from "@mantine/core";
+import { useLocation } from "react-router-dom";
 import { ROUTER } from "../../../constant/router.constant";
 import rootRouter from "../../../routes/rootRouter";
 
@@ -8,19 +9,18 @@ type TProps = {
 };
 
 export function Logo({ width = `40px`, color = `blue` }: TProps) {
+   const location = useLocation();
+
+   console.log();
+
    return (
       <Box
          onClick={() => {
-            rootRouter.navigate(ROUTER.HOME);
+            rootRouter.navigate(location.pathname === ROUTER.CLIENT ? ROUTER.CLIENT : ROUTER.HOME);
          }}
          style={{ cursor: `pointer` }}
       >
-         <svg
-            style={{ width: width }}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 163 163"
-         >
+         <svg style={{ width: width }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 163 163">
             <path
                fill={color === `blue` ? "#339AF0" : "#fff"}
                d="M162.162 81.5c0-45.011-36.301-81.5-81.08-81.5C36.301 0 0 36.489 0 81.5 0 126.51 36.301 163 81.081 163s81.081-36.49 81.081-81.5z"

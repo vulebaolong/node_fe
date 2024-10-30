@@ -10,14 +10,14 @@ import { TITLE_BASE } from "../../../constant/app.constant";
 
 const LIST_NAV = [
    { link: ROUTER.HOME, label: "Home", icon: Icons.IconHome },
-   { link: ROUTER.PROFILE.BASE, label: "Profile", icon: Icons.IconUserCircle },
-   { link: ROUTER.VIDEO.BASE, label: "Video", icon: Icons.IconVideo },
-   { link: ROUTER.CHAT.BASE, label: "Chat", icon: Icons.IconMessageCircle },
-   { link: ROUTER.ROLE.BASE, label: "Role", icon: Icons.IconLicense },
-   { link: ROUTER.USERS.BASE, label: "Users", icon: Icons.IconUsersGroup },
-   { link: ROUTER.PAYMENT.BASE, label: "Payment", icon: Icons.IconCreditCardPay },
+   { link: ROUTER.PROFILE.LIST, label: "Profile", icon: Icons.IconUserCircle },
+   { link: ROUTER.VIDEO.LIST, label: "Video", icon: Icons.IconVideo },
+   { link: ROUTER.CHAT.LIST, label: "Chat", icon: Icons.IconMessageCircle },
+   { link: ROUTER.ROLE.LIST, label: "Role", icon: Icons.IconLicense },
+   { link: ROUTER.USERS.LIST, label: "Users", icon: Icons.IconUsersGroup },
+   { link: ROUTER.PAYMENT.LIST, label: "Payment", icon: Icons.IconCreditCardPay },
    { link: ROUTER.SETTING, label: "Settings", icon: Icons.IconSettings },
-   { link: ROUTER.VIDEO_TEST.BASE, label: "Video Test", icon: Icons.IconVideo },
+   { link: ROUTER.VIDEO_TEST.LIST, label: "Video Test", icon: Icons.IconVideo },
 ];
 
 type TProps = {

@@ -5,7 +5,7 @@ import Home from "../pages/home/Home";
 import Payment from "../pages/payment/Payment";
 import { Profile } from "../pages/profile/Profile";
 import Role from "../pages/role/Role";
-import RoleDetail from "../pages/role/RoleDetail";
+import RoleDetail from "../pages/role/role-detail/RoleDetail";
 import RootPage from "../pages/root-page/RootPage";
 import Setting from "../pages/setting/Setting";
 import { Users } from "../pages/users/Users";
@@ -13,7 +13,7 @@ import Video from "../pages/video/Video";
 import VideoDetail from "../pages/video/VideoDetail";
 import VideoTest from "../pages/video/VideoTest";
 
-const clientRouter = [
+const adminRouter = [
    {
       path: ROUTER.HOME,
       element: (
@@ -23,7 +23,7 @@ const clientRouter = [
       ),
    },
    {
-      path: ROUTER.VIDEO_TEST.LIST(),
+      path: ROUTER.VIDEO_TEST.LIST,
       element: (
          <RootPage title="Video Test" protect>
             <VideoTest />
@@ -31,7 +31,7 @@ const clientRouter = [
       ),
    },
    {
-      path: ROUTER.VIDEO.LIST(),
+      path: ROUTER.VIDEO.LIST,
       element: (
          <RootPage title="Video" protect>
             <Video />
@@ -47,7 +47,7 @@ const clientRouter = [
       ),
    },
    {
-      path: ROUTER.CHAT.BASE,
+      path: ROUTER.CHAT.LIST,
       element: (
          <RootPage title="Video" protect>
             <Chat />
@@ -55,7 +55,7 @@ const clientRouter = [
       ),
    },
    {
-      path: ROUTER.ROLE.BASE,
+      path: ROUTER.ROLE.LIST,
       element: (
          <RootPage title="Role" protect>
             <Role />
@@ -71,7 +71,7 @@ const clientRouter = [
       ),
    },
    {
-      path: ROUTER.USERS.BASE,
+      path: ROUTER.USERS.LIST,
       element: (
          <RootPage title="Users" protect>
             <Users />
@@ -79,7 +79,7 @@ const clientRouter = [
       ),
    },
    {
-      path: ROUTER.PROFILE.BASE,
+      path: ROUTER.PROFILE.LIST,
       element: (
          <RootPage title="Profile" protect>
             <Profile />
@@ -87,7 +87,7 @@ const clientRouter = [
       ),
    },
    {
-      path: ROUTER.PAYMENT.BASE,
+      path: ROUTER.PAYMENT.LIST,
       element: (
          <RootPage title="Payment" protect>
             <Payment />
@@ -108,4 +108,4 @@ const clientRouter = [
    },
 ];
 
-export default clientRouter;
+export default adminRouter;

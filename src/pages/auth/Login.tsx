@@ -1,19 +1,4 @@
-import {
-   Anchor,
-   Box,
-   Button,
-   Center,
-   Divider,
-   Group,
-   Paper,
-   PinInput,
-   rem,
-   Stack,
-   Text,
-   TextInput,
-   Title,
-   Transition
-} from "@mantine/core";
+import { Anchor, Box, Button, Center, Divider, Group, Paper, PinInput, rem, Stack, Text, TextInput, Title, Transition } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -84,9 +69,9 @@ export default function Login() {
                   });
                }
             },
-            onError: (err) => { 
-               toast.error(resError(err, `Check before login failed`))
-             }
+            onError: (err) => {
+               toast.error(resError(err, `Check before login failed`));
+            },
          });
       },
    });
@@ -121,170 +106,168 @@ export default function Login() {
    });
 
    return (
-      <Stack h={`100dvh`} justify="center" align="center">
-         <Box className={`${classes.wrapForm}`} style={{ animation: "fadeInUp 0.5s" }} px={`md`}>
-            <Center>
-               <Logo />
-            </Center>
-            <Title mt={20} ta="center" style={{ fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}>
-               Welcome back!
-            </Title>
+      <Box className={`${classes.wrapForm}`} style={{ animation: "fadeInUp 0.5s" }} px={`md`}>
+         <Center>
+            <Logo />
+         </Center>
+         <Title mt={20} ta="center" style={{ fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}>
+            Welcome back!
+         </Title>
 
-            <Group grow mb="md" mt="md">
-               <GoogleButton radius="xl">Google</GoogleButton>
-               <FacebookButton radius="xl">Facebook</FacebookButton>
-            </Group>
+         <Group grow mb="md" mt="md">
+            <GoogleButton radius="xl">Google</GoogleButton>
+            <FacebookButton radius="xl">Facebook</FacebookButton>
+         </Group>
 
-            <Divider label="Or continue with email" labelPosition="center" my="lg" />
+         <Divider label="Or continue with email" labelPosition="center" my="lg" />
 
-            <Paper
-               withBorder
-               shadow="md"
-               p={30}
-               mt={30}
-               radius="md"
-               style={{
-                  display: `flex`,
-                  flexDirection: `column`,
-                  justifyContent: `space-between`,
-                  overflow: `hidden`,
+         <Paper
+            withBorder
+            shadow="md"
+            p={30}
+            mt={30}
+            radius="md"
+            style={{
+               display: `flex`,
+               flexDirection: `column`,
+               justifyContent: `space-between`,
+               overflow: `hidden`,
+            }}
+         >
+            <Box h={256}>
+               <Transition enterDelay={400} mounted={step === `login`} transition="slide-right" duration={400} timingFunction="ease">
+                  {(styles) => (
+                     <div style={{ ...styles, height: `100%` }}>
+                        <Box
+                           component="form"
+                           onSubmit={(e) => {
+                              e.preventDefault();
+                              loginForm.handleSubmit();
+                           }}
+                        >
+                           <Box h={200}>
+                              <TextInput
+                                 withAsterisk
+                                 label="Email"
+                                 placeholder="Email"
+                                 name="email"
+                                 value={loginForm.values.email}
+                                 onChange={loginForm.handleChange}
+                                 error={loginForm.touched.email && loginForm.errors.email}
+                                 inputWrapperOrder={["label", "input", "error"]}
+                                 style={{ height: `90px` }}
+                              />
+                              <CustomPasswordInput
+                                 label="Password"
+                                 placeholder="Your password"
+                                 withAsterisk
+                                 name="pass_word"
+                                 value={loginForm.values.pass_word}
+                                 onChange={loginForm.handleChange}
+                                 error={loginForm.touched.pass_word && loginForm.errors.pass_word}
+                                 inputWrapperOrder={["label", "input", "error"]}
+                                 style={{ height: `90px` }}
+                              />
+                              <Group justify="end">
+                                 <Anchor
+                                    onClick={() => {
+                                       rootRouter.navigate(ROUTER.FORGOT_PASSWORD);
+                                    }}
+                                    type="button"
+                                    component="button"
+                                    size="sm"
+                                 >
+                                    Forgot password?
+                                 </Anchor>
+                              </Group>
+                           </Box>
+
+                           <Button mt={20} loading={login.isPending} type="submit" fullWidth style={{ flexShrink: `0` }}>
+                              Login
+                           </Button>
+                        </Box>
+                     </div>
+                  )}
+               </Transition>
+
+               <Transition enterDelay={400} mounted={step === `2 fa`} transition="slide-left" duration={400} timingFunction="ease">
+                  {(styles) => (
+                     <div style={{ ...styles, height: `100%` }}>
+                        <Box
+                           component="form"
+                           onSubmit={(e) => {
+                              e.preventDefault();
+                              login2FaForm.handleSubmit();
+                           }}
+                        >
+                           <Stack h={200}>
+                              <Group justify="space-between">
+                                 <Anchor
+                                    onClick={() => {
+                                       setStep(`login`);
+                                    }}
+                                    c="dimmed"
+                                    size="sm"
+                                 >
+                                    <Center inline>
+                                       <IconArrowLeft style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
+                                       <Box ml={5}>Back to login</Box>
+                                    </Center>
+                                 </Anchor>
+                              </Group>
+                              <Title order={4} ta={`center`}>
+                                 Two-factor Authentication
+                              </Title>
+                              <Text c={`dimmed`} ta={`center`}>
+                                 Enter the code displayed in your authenticator app
+                              </Text>
+                              <Box>
+                                 <Center>
+                                    <PinInput
+                                       length={6}
+                                       name="token"
+                                       value={login2FaForm.values.token}
+                                       onChange={(e) => {
+                                          login2FaForm.setFieldValue(`token`, e);
+                                       }}
+                                       error={!!(login2FaForm.touched.token && login2FaForm.errors.token)}
+                                    />
+                                 </Center>
+                                 <Center>
+                                    <Text
+                                       c={`var(--input-asterisk-color, var(--mantine-color-error))`}
+                                       style={{
+                                          fontSize: `var(--input-error-size, calc(var(--mantine-font-size-sm) - calc(0.125rem * var(--mantine-scale))))`,
+                                       }}
+                                    >
+                                       {login2FaForm.touched.token && login2FaForm.errors.token}
+                                    </Text>
+                                 </Center>
+                              </Box>
+                           </Stack>
+                           <Button mt={20} loading={login.isPending} type="submit" fullWidth style={{ flexShrink: `0` }}>
+                              Login 2FA
+                           </Button>
+                        </Box>
+                     </div>
+                  )}
+               </Transition>
+            </Box>
+         </Paper>
+
+         <Text ta="center" mt="md">
+            Don&apos;t have an account?{" "}
+            <Anchor<"a">
+               href="#"
+               fw={700}
+               onClick={(event) => {
+                  event.preventDefault();
+                  rootRouter.navigate(ROUTER.REGISTER);
                }}
             >
-               <Box h={256}>
-                  <Transition enterDelay={400} mounted={step === `login`} transition="slide-right" duration={400} timingFunction="ease">
-                     {(styles) => (
-                        <div style={{ ...styles, height: `100%` }}>
-                           <Box
-                              component="form"
-                              onSubmit={(e) => {
-                                 e.preventDefault();
-                                 loginForm.handleSubmit();
-                              }}
-                           >
-                              <Box h={200}>
-                                 <TextInput
-                                    withAsterisk
-                                    label="Email"
-                                    placeholder="Email"
-                                    name="email"
-                                    value={loginForm.values.email}
-                                    onChange={loginForm.handleChange}
-                                    error={loginForm.touched.email && loginForm.errors.email}
-                                    inputWrapperOrder={["label", "input", "error"]}
-                                    style={{ height: `90px` }}
-                                 />
-                                 <CustomPasswordInput
-                                    label="Password"
-                                    placeholder="Your password"
-                                    withAsterisk
-                                    name="pass_word"
-                                    value={loginForm.values.pass_word}
-                                    onChange={loginForm.handleChange}
-                                    error={loginForm.touched.pass_word && loginForm.errors.pass_word}
-                                    inputWrapperOrder={["label", "input", "error"]}
-                                    style={{ height: `90px` }}
-                                 />
-                                 <Group justify="end">
-                                    <Anchor
-                                       onClick={() => {
-                                          rootRouter.navigate(ROUTER.FORGOT_PASSWORD);
-                                       }}
-                                       type="button"
-                                       component="button"
-                                       size="sm"
-                                    >
-                                       Forgot password?
-                                    </Anchor>
-                                 </Group>
-                              </Box>
-
-                              <Button mt={20} loading={login.isPending} type="submit" fullWidth style={{ flexShrink: `0` }}>
-                                 Login
-                              </Button>
-                           </Box>
-                        </div>
-                     )}
-                  </Transition>
-
-                  <Transition enterDelay={400} mounted={step === `2 fa`} transition="slide-left" duration={400} timingFunction="ease">
-                     {(styles) => (
-                        <div style={{ ...styles, height: `100%` }}>
-                           <Box
-                              component="form"
-                              onSubmit={(e) => {
-                                 e.preventDefault();
-                                 login2FaForm.handleSubmit();
-                              }}
-                           >
-                              <Stack h={200}>
-                                 <Group justify="space-between">
-                                    <Anchor
-                                       onClick={() => {
-                                          setStep(`login`);
-                                       }}
-                                       c="dimmed"
-                                       size="sm"
-                                    >
-                                       <Center inline>
-                                          <IconArrowLeft style={{ width: rem(12), height: rem(12) }} stroke={1.5} />
-                                          <Box ml={5}>Back to login</Box>
-                                       </Center>
-                                    </Anchor>
-                                 </Group>
-                                 <Title order={4} ta={`center`}>
-                                    Two-factor Authentication
-                                 </Title>
-                                 <Text c={`dimmed`} ta={`center`}>
-                                    Enter the code displayed in your authenticator app
-                                 </Text>
-                                 <Box>
-                                    <Center>
-                                       <PinInput
-                                          length={6}
-                                          name="token"
-                                          value={login2FaForm.values.token}
-                                          onChange={(e) => {
-                                             login2FaForm.setFieldValue(`token`, e);
-                                          }}
-                                          error={!!(login2FaForm.touched.token && login2FaForm.errors.token)}
-                                       />
-                                    </Center>
-                                    <Center>
-                                       <Text
-                                          c={`var(--input-asterisk-color, var(--mantine-color-error))`}
-                                          style={{
-                                             fontSize: `var(--input-error-size, calc(var(--mantine-font-size-sm) - calc(0.125rem * var(--mantine-scale))))`,
-                                          }}
-                                       >
-                                          {login2FaForm.touched.token && login2FaForm.errors.token}
-                                       </Text>
-                                    </Center>
-                                 </Box>
-                              </Stack>
-                              <Button mt={20} loading={login.isPending} type="submit" fullWidth style={{ flexShrink: `0` }}>
-                                 Login 2FA
-                              </Button>
-                           </Box>
-                        </div>
-                     )}
-                  </Transition>
-               </Box>
-            </Paper>
-
-            <Text ta="center" mt="md">
-               Don&apos;t have an account?{" "}
-               <Anchor<"a">
-                  href="#"
-                  fw={700}
-                  onClick={(event) => {
-                     event.preventDefault();
-                     rootRouter.navigate(ROUTER.REGISTER);
-                  }}
-               >
-                  Register
-               </Anchor>
-            </Text>
-         </Box>
-      </Stack>
+               Register
+            </Anchor>
+         </Text>
+      </Box>
    );
 }

@@ -24,8 +24,8 @@ export default function RootPage({ children, title = "", meta, protect = false }
    const { id } = useParams();
    const isRoute = useCheckRoute([ROUTER.LOGIN, ROUTER.REGISTER]);
    const location = useLocation();
-
    const networkStatus = useNetwork();
+   
    useEffect(() => {
       if (!networkStatus.online) {
          idToast = toast.info(`You are offline`, {
@@ -50,8 +50,6 @@ export default function RootPage({ children, title = "", meta, protect = false }
       }
 
       if (!protect) return children;
-
-      // if (loadingPage) return <Loader />;
 
       return children;
    };

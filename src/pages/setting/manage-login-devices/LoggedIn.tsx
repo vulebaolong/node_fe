@@ -68,7 +68,7 @@ export default function LoggedIn() {
                               animationDelay: `${50 * i}ms`,
                            }}
                         >
-                           {sessionLogin.session_login_id === info?.session_login[0].session_login_id ? (
+                           {sessionLogin.session_login_id === info?.session_login?.[0]?.session_login_id ? (
                               <IconDevicesCheck color="green" className={`${classes.iconDevice}`} />
                            ) : (
                               <IconDevices className={`${classes.iconDevice}`} />
@@ -86,13 +86,13 @@ export default function LoggedIn() {
                            onClick={() => {
                               handleLogoutDevice(sessionLogin.session_login_id);
                            }}
-                           disabled={sessionLogin.session_login_id === info?.session_login[0].session_login_id}
+                           disabled={sessionLogin.session_login_id === info?.session_login?.[0]?.session_login_id}
                            size="xs"
                            variant="outline"
                            color={`red`}
                            style={{ flexShrink: `0` }}
                         >
-                           {sessionLogin.session_login_id === info?.session_login[0].session_login_id ? `This Device` : `Logout`}
+                           {sessionLogin.session_login_id === info?.session_login?.[0]?.session_login_id ? `This Device` : `Logout`}
                         </Button>
                      </Group>
                   </Fragment>

@@ -1,72 +1,36 @@
-const BASE = "/";
-
 export const ROUTER = {
-   HOME: BASE,
-   LOGIN: `${BASE}login`,
-   REGISTER: `${BASE}register`,
-   FORGOT_PASSWORD: `${BASE}forgot-password`,
-   SETTING: `${BASE}setting`,
+   CLIENT: "/",
+   HOME: "/home",
+   LOGIN: `/login`,
+   REGISTER: `/register`,
+   FORGOT_PASSWORD: `/forgot-password`,
+   SETTING: `/setting`,
    VIDEO: {
-      BASE: `${BASE}video`,
-      LIST() {
-         return this.BASE;
-      },
-      DETAIL(id: number | string = ":videoId") {
-         return `${this.BASE}/${id}`;
-      },
+      LIST: `/video`,
+      DETAIL: (id: number | string = ":videoId") => `/video/${id}`,
    },
    VIDEO_TEST: {
-      BASE: `${BASE}video-test`,
-      LIST() {
-         return this.BASE;
-      },
-      DETAIL(id: number | string = ":videoId") {
-         return `${this.BASE}/${id}`;
-      },
+      LIST: `/video-test`,
+      DETAIL: (id: number | string = ":videoId") => `/video-test/${id}`,
    },
    ROLE: {
-      BASE: `${BASE}role`,
-      LIST() {
-         return this.BASE;
-      },
-      DETAIL(id: number | string = ":roleId") {
-         return `${this.BASE}/${id}`;
-      },
+      LIST: `/role`,
+      DETAIL: (id: number | string = ":roleId") => `/role/${id}`,
    },
    CHAT: {
-      BASE: `${BASE}chat`,
-      LIST() {
-         return this.BASE;
-      },
-      DETAIL(id: number | string = ":chatId") {
-         return `${this.BASE}/${id}`;
-      },
+      LIST: `/chat`,
+      DETAIL: (id: number | string = ":chatId") => `/chat/${id}`,
    },
    USERS: {
-      BASE: `${BASE}users`,
-      LIST() {
-         return this.BASE;
-      },
-      DETAIL(id: number | string = ":userId") {
-         return `${this.BASE}/${id}`;
-      },
+      LIST: `/users`,
+      DETAIL: (id: number | string = ":userId") => `/users/${id}`,
    },
    PAYMENT: {
-      BASE: `${BASE}payment`,
-      LIST() {
-         return this.BASE;
-      },
-      DETAIL(id: number | string = ":paymentId") {
-         return `${this.BASE}/${id}`;
-      },
+      LIST: `/payment`,
+      DETAIL: (id: number | string = ":paymentId") => `/payment/${id}`,
    },
    PROFILE: {
-      BASE: `${BASE}profile`,
-      LIST() {
-         return this.BASE;
-      },
-      DETAIL(id: number | string = ":profileId") {
-         return `${this.BASE}/${id}`;
-      },
+      LIST: `/profile`,
+      DETAIL: (id: number | string = ":profileId") => `/profile/${id}`,
    },
 };

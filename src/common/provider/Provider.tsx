@@ -20,17 +20,17 @@ const queryClient = new QueryClient({
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
    return (
-      <QueryClientProvider client={queryClient}>
-         <ProviderRedux store={store}>
-            <HelmetProvider>
-               <MantineProvider theme={theme}>
-                  <ToastProvider />
-                  <GoogleProvider>{children}</GoogleProvider>
-               </MantineProvider>
-            </HelmetProvider>
-         </ProviderRedux>
-         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      </QueryClientProvider>
+         <QueryClientProvider client={queryClient}>
+            <ProviderRedux store={store}>
+               <HelmetProvider>
+                  <MantineProvider theme={theme}>
+                     <ToastProvider />
+                     <GoogleProvider>{children}</GoogleProvider>
+                  </MantineProvider>
+               </HelmetProvider>
+            </ProviderRedux>
+            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+         </QueryClientProvider>
    );
 };
 

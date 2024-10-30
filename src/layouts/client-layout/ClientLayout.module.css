@@ -1,0 +1,22 @@
+.main {
+   padding-top: var(--height-header);
+}
+
+.home-page {
+   position: relative;
+   z-index: 1;
+   box-shadow: var(--mantine-shadow-md);
+   background-color: var(--mantine-color-body);
+   min-height: 100vh;
+}
+
+.footer-spacer {
+   height: 400px;
+}
+
+.footer-wraper {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+}

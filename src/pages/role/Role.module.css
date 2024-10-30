@@ -16,9 +16,4 @@
    width: 70px;
 }
 
-.moduleWrap {
-   gap: 20px;
-   display: grid;
-   grid-template-columns: mobile-desktop(1fr = 1fr 1fr);
-}
 

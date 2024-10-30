@@ -19,7 +19,6 @@ export const ENDPOINT = {
    VIDEO: {
       VIDEO_LIST_TEST: `video-list`,
       VIDEO_TYPE_TEST: `video-type`,
-
       VIDEO_LIST: `video/video-list`,
       VIDEO_TYPE: `video/video-type`,
       VIDEO_DETAIL: `video/video-detail`,
@@ -44,4 +43,5 @@ export const ENDPOINT = {
    TOGGLE_PERMISSION: `role/toggle-permission`,
    PERMISSION_GROUP_BY_MODULE: `permission/group-by-module`,
    PAYMENT_MOMO: `payment/momo-pay`,
+   CAR: "cars",
 };

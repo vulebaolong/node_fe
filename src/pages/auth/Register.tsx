@@ -1,4 +1,4 @@
-import { Anchor, Box, Button, Center, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@mantine/core";
+import { Anchor, Box, Button, Center, Paper, PasswordInput, Text, TextInput, Title } from "@mantine/core";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRegister } from "../../common/api/tanstack/auth.tanstack";
@@ -35,86 +35,84 @@ export default function Register() {
    });
 
    return (
-      <Stack h={`100dvh`} justify="center" align="center">
-         <Box className={`${classes.wrapForm}`} style={{ animation: "fadeInUp 0.5s" }} px={`md`}>
-            <Center>
-               <Logo />
-            </Center>
-            <Title mt={20} ta="center" style={{ fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}>
-               Register!
-            </Title>
+      <Box className={`${classes.wrapForm}`} style={{ animation: "fadeInUp 0.5s" }} px={`md`}>
+         <Center>
+            <Logo />
+         </Center>
+         <Title mt={20} ta="center" style={{ fontFamily: `Greycliff CF,   var(--mantine-font-family)`, fontWeight: `900` }}>
+            Register!
+         </Title>
 
-            <Paper
-               withBorder
-               shadow="md"
-               p={30}
-               mt={30}
-               radius="md"
-               style={{
-                  display: `flex`,
-                  flexDirection: `column`,
-                  justifyContent: `space-between`,
-               }}
-               component="form"
-               onSubmit={(e) => {
-                  e.preventDefault();
-                  loginForm.handleSubmit();
+         <Paper
+            withBorder
+            shadow="md"
+            p={30}
+            mt={30}
+            radius="md"
+            style={{
+               display: `flex`,
+               flexDirection: `column`,
+               justifyContent: `space-between`,
+            }}
+            component="form"
+            onSubmit={(e) => {
+               e.preventDefault();
+               loginForm.handleSubmit();
+            }}
+         >
+            <Box>
+               <TextInput
+                  withAsterisk
+                  label="Full name"
+                  placeholder="Full name"
+                  name="full_name"
+                  value={loginForm.values.full_name}
+                  onChange={loginForm.handleChange}
+                  error={loginForm.touched.full_name && loginForm.errors.full_name}
+                  inputWrapperOrder={["label", "input", "error"]}
+                  style={{ height: `90px` }}
+               />
+               <TextInput
+                  withAsterisk
+                  label="Email"
+                  placeholder="email"
+                  name="email"
+                  value={loginForm.values.email}
+                  onChange={loginForm.handleChange}
+                  error={loginForm.touched.email && loginForm.errors.email}
+                  inputWrapperOrder={["label", "input", "error"]}
+                  style={{ height: `90px` }}
+               />
+               <PasswordInput
+                  label="Password"
+                  placeholder="Your pass_word"
+                  withAsterisk
+                  name="pass_word"
+                  value={loginForm.values.pass_word}
+                  onChange={loginForm.handleChange}
+                  error={loginForm.touched.pass_word && loginForm.errors.pass_word}
+                  inputWrapperOrder={["label", "input", "error"]}
+                  style={{ height: `90px` }}
+               />
+            </Box>
+            <Button loading={register.isPending} type="submit" fullWidth style={{ flexShrink: `0` }}>
+               Register
+            </Button>
+         </Paper>
+
+         <Text ta="center" mt="md">
+            Don&apos;t have an account?{" "}
+            <Anchor<"a">
+               href="#"
+               fw={700}
+               onClick={(event) => {
+                  event.preventDefault();
+                  rootRouter.navigate(ROUTER.LOGIN);
                }}
             >
-               <Box>
-                  <TextInput
-                     withAsterisk
-                     label="Full name"
-                     placeholder="Full name"
-                     name="full_name"
-                     value={loginForm.values.full_name}
-                     onChange={loginForm.handleChange}
-                     error={loginForm.touched.full_name && loginForm.errors.full_name}
-                     inputWrapperOrder={["label", "input", "error"]}
-                     style={{ height: `90px` }}
-                  />
-                  <TextInput
-                     withAsterisk
-                     label="Email"
-                     placeholder="email"
-                     name="email"
-                     value={loginForm.values.email}
-                     onChange={loginForm.handleChange}
-                     error={loginForm.touched.email && loginForm.errors.email}
-                     inputWrapperOrder={["label", "input", "error"]}
-                     style={{ height: `90px` }}
-                  />
-                  <PasswordInput
-                     label="Password"
-                     placeholder="Your pass_word"
-                     withAsterisk
-                     name="pass_word"
-                     value={loginForm.values.pass_word}
-                     onChange={loginForm.handleChange}
-                     error={loginForm.touched.pass_word && loginForm.errors.pass_word}
-                     inputWrapperOrder={["label", "input", "error"]}
-                     style={{ height: `90px` }}
-                  />
-               </Box>
-               <Button loading={register.isPending} type="submit" fullWidth style={{ flexShrink: `0` }}>
-                  Register
-               </Button>
-            </Paper>
-
-            <Text ta="center" mt="md">
-               Don&apos;t have an account?{" "}
-               <Anchor<"a">
-                  href="#"
-                  fw={700}
-                  onClick={(event) => {
-                     event.preventDefault();
-                     rootRouter.navigate(ROUTER.LOGIN);
-                  }}
-               >
-                  Login
-               </Anchor>
-            </Text>
-         </Box>
-      </Stack>
+               Login
+            </Anchor>
+         </Text>
+      </Box>
    );
 }

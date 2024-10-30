@@ -1,0 +1,17 @@
+.moduleWrap {
+   gap: 20px;
+   display: grid;
+   grid-template-columns: mobile-desktop(1fr = 1fr 1fr);
+}
+
+.box-1 {
+   padding: mobile-desktop(20px = 20px);
+}
+
+.max-width-1 {
+   max-width: mobile-desktop(100px = 175px);
+}
+
+.max-width-2 {
+   max-width: mobile-desktop(200px = 200px);
+}

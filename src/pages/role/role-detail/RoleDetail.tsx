@@ -2,11 +2,11 @@ import { Accordion, Badge, Box, Group, Paper, Stack, Switch, Text, Title } from 
 import { useQueryClient } from "@tanstack/react-query";
 import _ from "lodash";
 import { useParams } from "react-router-dom";
-import { usePermissionGroupByModule } from "../../common/api/tanstack/permission.tanstack";
-import { useTogglePermission, useDetailRole } from "../../common/api/tanstack/role.tanstack";
-import classes from "./Role.module.css";
+import { usePermissionGroupByModule } from "../../../common/api/tanstack/permission.tanstack";
+import { useTogglePermission, useDetailRole } from "../../../common/api/tanstack/role.tanstack";
 import { toast } from "react-toastify";
-import { resError } from "../../helpers/function.helper";
+import { resError } from "../../../helpers/function.helper";
+import classes from "./RoleDetail.module.css";
 
 export default function RoleDetail() {
    const { roleId } = useParams();
@@ -51,22 +51,15 @@ export default function RoleDetail() {
                      <Box className={`${classes.moduleWrap}`}>
                         {permissions.map((permission, i2) => {
                            return (
-                              <Paper shadow="xs" withBorder p="xl" radius="md" key={i2}>
-                                 <Group wrap="nowrap">
-                                       <Switch
-                                          onClick={() => {
-                                             handleClickSwitch(permission.permission_id);
-                                          }}
-                                          onLabel={`ON`}
-                                          offLabel={`OFF`}
-                                          checked={!_.isEmpty(permission.role_permissions)}
-                                       />
+                              <Paper className={`${classes[`box-1`]}`} shadow="xs" withBorder radius="md" key={i2}>
+                                 <Group wrap="nowrap" justify="space-between" gap={0}>
                                     <Stack>
-                                       <Title px={10} order={5}>
-                                          {permission.name}
-                                       </Title>
-
-                                       <Group>
+                                       <Group wrap="nowrap" gap={5}>
+                                          <Title order={6}>
+                                             <Text className={`${classes[`max-width-1`]}`} truncate inherit>
+                                                {permission.name}
+                                             </Text>
+                                          </Title>
                                           <Badge
                                              size="lg"
                                              variant="light"
@@ -80,12 +73,21 @@ export default function RoleDetail() {
                                           >
                                              {permission.method}
                                           </Badge>
-
-                                          <Text c="dimmed" fs="italic" w={`fit-content`} px={10}>
-                                             {permission.endpoint}
-                                          </Text>
                                        </Group>
+
+                                       <Text fz={12} truncate className={`${classes[`max-width-2`]}`} c="dimmed" fs="italic" w={`fit-content`}>
+                                          {permission.endpoint}
+                                       </Text>
                                     </Stack>
+
+                                    <Switch
+                                       onClick={() => {
+                                          handleClickSwitch(permission.permission_id);
+                                       }}
+                                       onLabel={`ON`}
+                                       offLabel={`OFF`}
+                                       checked={!_.isEmpty(permission.role_permissions)}
+                                    />
                                  </Group>
                               </Paper>
                            );
