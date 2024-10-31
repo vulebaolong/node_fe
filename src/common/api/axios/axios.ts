@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_DOMAIN_API } from "../../../constant/app.constant";
 import { ENDPOINT } from "../../../constant/endpoint.constant";
-import { getAccessToken, getRefreshToken, getDeviceId, logOut, setAccessToken, setRefreshToken } from "../../../helpers/auth.helper";
+import { getAccessToken, getDeviceId, getRefreshToken, logOut, setAccessToken, setRefreshToken } from "../../../helpers/auth.helper";
 
 const api = axios.create({
    baseURL: BASE_DOMAIN_API,

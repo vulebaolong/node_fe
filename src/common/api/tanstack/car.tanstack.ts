@@ -7,14 +7,14 @@ import { ENDPOINT } from "../../../constant/endpoint.constant";
 type TUseCarList = {
    page: number;
    pageSize: number;
-   search: string;
+   search?: string;
 };
 
 export const useCarList = ({ page, pageSize, search }: TUseCarList) => {
    return useQuery({
       queryKey: [`car-list`, page, pageSize, search],
       queryFn: async () => {
-         const { data } = await api.get<TResPagination<TCar[]>>(`${ENDPOINT.CAR}?page=${page}&pageSize=${pageSize}&search=${search}`);
+         const { data } = await api.get<TResPagination<TCar[]>>(`${ENDPOINT.CAR}?page=${page}&pageSize=${pageSize}`);
          return data.metaData;
       },
    });

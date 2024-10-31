@@ -35,6 +35,7 @@ export const ENDPOINT = {
    },
    CHAT: {
       BASE: (id = "") => `/chat/${id}`,
+      LIST_USER_CHAT: `chat/list-user-chat`
    },
    USER: `user`,
    UPLOAD_AVATAR_LOCAL: `user/avatar-local`,

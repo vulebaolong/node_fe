@@ -10,9 +10,8 @@ let totalPage = 0;
 export default function CarList() {
    const [page, setPage] = useState(1);
    const [pageSize, setPageSize] = useState(9);
-   const [search, setSearch] = useState("");
 
-   const carList = useCarList({ page, pageSize, search });
+   const carList = useCarList({ page, pageSize });
    totalPage = carList.data?.totalPage || totalPage;
 
    const renderContent = () => {

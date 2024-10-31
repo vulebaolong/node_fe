@@ -1,5 +1,7 @@
-import { Avatar, Badge, Table, Group, Text, Select } from "@mantine/core";
-import { checkPathAvatar } from "../../helpers/function.helper";
+import { Badge, Box, Center, Group, Pagination, Select, Stack, Table, Text } from "@mantine/core";
+import { useState } from "react";
+import { useGetUserList } from "../../common/api/tanstack/user.tanstack";
+import { Avatar } from "../../common/components/avatar/Avatar";
 
 const data = [
    {
@@ -49,56 +51,95 @@ const data = [
    },
 ];
 
+let totalPage = 0;
+
 const rolesData = ["Manager", "Collaborator", "Contractor"];
 
 export function Users() {
-   const rows = data.map((item) => (
-      <Table.Tr key={item.name}>
-         <Table.Td>
-            <Group gap="sm">
-               <Avatar size={40} src={checkPathAvatar(item.avatar)} radius={40} alt="avatar" />
-               <div>
-                  <Text fz="sm" fw={500}>
-                     {item.name}
-                  </Text>
-                  <Text fz="xs" c="dimmed">
-                     {item.email}
-                  </Text>
-               </div>
-            </Group>
-         </Table.Td>
+   const [page, setPage] = useState(1);
+   const [pageSize, setPageSize] = useState(5);
 
-         <Table.Td>
-            <Select data={rolesData} defaultValue={item.role} variant="unstyled" allowDeselect={false} />
-         </Table.Td>
-         <Table.Td>{item.lastActive}</Table.Td>
-         <Table.Td>
-            {item.active ? (
-               <Badge fullWidth variant="light">
-                  Active
-               </Badge>
-            ) : (
-               <Badge color="gray" fullWidth variant="light">
-                  Disabled
-               </Badge>
-            )}
-         </Table.Td>
-      </Table.Tr>
-   ));
+   const userList = useGetUserList({
+      page: page,
+      pageSize: pageSize,
+      search: "",
+      notMe: false,
+   });
+   totalPage = userList.data?.totalPage || totalPage;
 
    return (
-      <Table.ScrollContainer minWidth={800}>
-         <Table verticalSpacing="sm">
-            <Table.Thead>
-               <Table.Tr>
-                  <Table.Th>Employee</Table.Th>
-                  <Table.Th>Role</Table.Th>
-                  <Table.Th>Last active</Table.Th>
-                  <Table.Th>Status</Table.Th>
-               </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{rows}</Table.Tbody>
-         </Table>
-      </Table.ScrollContainer>
+      <Stack>
+         <Box style={{ width: `100%`, paddingBottom: `150px` }}>
+            <Table.ScrollContainer minWidth={800} h={`500px`}>
+               <Table verticalSpacing="sm" stickyHeader>
+                  <Table.Thead>
+                     <Table.Tr>
+                        <Table.Th w={300}>User</Table.Th>
+                        <Table.Th>Role</Table.Th>
+                     </Table.Tr>
+                  </Table.Thead>
+                  <Table.Tbody>
+                     {userList.data?.items.map((user, i) => {
+                        return (
+                           <Table.Tr
+                              key={user.user_id}
+                              style={{
+                                 opacity: "0",
+                                 animation: "fadeInUp 0.5s forwards",
+                                 animationDelay: `${50 * i}ms`,
+                              }}
+                           >
+                              <Table.Td>
+                                 <Group gap="sm">
+                                    <Avatar user={user} />
+                                    <div>
+                                       <Text fz="sm" fw={500}>
+                                          {user.full_name}
+                                       </Text>
+                                       <Text fz="xs" c="dimmed">
+                                          {user.email}
+                                       </Text>
+                                    </div>
+                                 </Group>
+                              </Table.Td>
+
+                              <Table.Td>
+                                 <Badge color={user.roles.role_id === 1 ? `red` : ``} variant="light">
+                                    {user.roles.name}
+                                 </Badge>
+                              </Table.Td>
+                           </Table.Tr>
+                        );
+                     })}
+                  </Table.Tbody>
+               </Table>
+            </Table.ScrollContainer>
+         </Box>
+
+         <Box
+            className={`wrapPagination`}
+            style={{
+               display: "flex",
+               justifyContent: "end",
+               alignItems: "center",
+               gap: `10px`,
+            }}
+         >
+            <Box style={{ width: `55px` }}>
+               <Select
+                  size="xs"
+                  value={`${pageSize}`}
+                  onChange={(value) => {
+                     if (value === null) return;
+                     setPageSize(Number(value));
+                     setPage(1);
+                  }}
+                  data={Array.from({ length: 5 }, (_, i) => `${5 * (i + 1)}`)}
+               />
+            </Box>
+
+            <Pagination radius={`md`} size={`sm`} disabled={userList.isLoading} value={page} total={totalPage} onChange={setPage} />
+         </Box>
+      </Stack>
    );
 }

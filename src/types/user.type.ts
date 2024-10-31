@@ -48,7 +48,7 @@ export type TTwoFa = {
    updated_at: string;
 };
 
-export type TUserListRes = {
+export type TListUserChatRes = {
    chats_chats_user_id_recipientTousers?: TCreateChatRes[];
    chats_chats_user_id_senderTousers?: TCreateChatRes[];
    lastMessage: string;

@@ -17,7 +17,6 @@ const LIST_NAV = [
    { link: ROUTER.USERS.LIST, label: "Users", icon: Icons.IconUsersGroup },
    { link: ROUTER.PAYMENT.LIST, label: "Payment", icon: Icons.IconCreditCardPay },
    { link: ROUTER.SETTING, label: "Settings", icon: Icons.IconSettings },
-   { link: ROUTER.VIDEO_TEST.LIST, label: "Video Test", icon: Icons.IconVideo },
 ];
 
 type TProps = {

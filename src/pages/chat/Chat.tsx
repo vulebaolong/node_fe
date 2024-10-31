@@ -4,15 +4,14 @@ import { IconArrowNarrowLeft, IconSearch, IconSend2 } from "@tabler/icons-react"
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
-import { useCreateChat } from "../../common/api/tanstack/chat.tanstack";
-import { useGetUserList } from "../../common/api/tanstack/user.tanstack";
+import { useCreateChat, useListUserChat } from "../../common/api/tanstack/chat.tanstack";
 import { Avatar } from "../../common/components/avatar/Avatar";
 import Nodata from "../../common/components/no-data/Nodata";
 import { useIsMobile } from "../../common/hooks/is-mobile.hooks";
 import { BASE_DOMAIN_API, isProduction } from "../../constant/app.constant";
 import { useAppSelector } from "../../store/store";
 import { TListChatRes } from "../../types/chat.type";
-import { TUserListRes } from "../../types/user.type";
+import { TListUserChatRes } from "../../types/user.type";
 import classes from "./Chat.module.css";
 
 export default function Chat() {
@@ -27,14 +26,15 @@ export default function Chat() {
    });
    const [search, setSearch] = useState(``);
    const [step, setStep] = useState<1 | 2>(1);
-   const [userSelected, setUserSelected] = useState<TUserListRes | null>(null);
+   const [userSelected, setUserSelected] = useState<TListUserChatRes | null>(null);
 
    const createChat = useCreateChat();
    const queryClient = useQueryClient();
-   const userList = useGetUserList({
+   const listUserChat = useListUserChat({
       page: pagination.page,
       pageSize: pagination.pageSize,
       search,
+      notMe: true,
    });
    const [listMessage, setListMessage] = useState<TListChatRes[] | null>(null);
 
@@ -121,7 +121,7 @@ export default function Chat() {
    };
 
    const renderContentUser = () => {
-      if (userList.isLoading) {
+      if (listUserChat.isLoading) {
          return (
             <Center>
                <Loader size={`md`} mt={50} />
@@ -129,11 +129,11 @@ export default function Chat() {
          );
       }
 
-      if (userList.isError || !userList.data || userList.data?.items.length === 0) {
+      if (listUserChat.isError || !listUserChat.data || listUserChat.data?.items.length === 0) {
          return <Nodata />;
       }
 
-      return userList.data.items.map((user, i) => {
+      return listUserChat.data.items.map((user, i) => {
          return (
             <Group
                onClick={() => {

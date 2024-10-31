@@ -76,10 +76,6 @@ export function Profile() {
             <Center mt={10}>
                <Badge user={info} />
             </Center>
-
-            <Button variant="default" fullWidth mt="md">
-               Send message
-            </Button>
          </Paper>
 
          <Dropzone

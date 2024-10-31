@@ -23,14 +23,6 @@ const adminRouter = [
       ),
    },
    {
-      path: ROUTER.VIDEO_TEST.LIST,
-      element: (
-         <RootPage title="Video Test" protect>
-            <VideoTest />
-         </RootPage>
-      ),
-   },
-   {
       path: ROUTER.VIDEO.LIST,
       element: (
          <RootPage title="Video" protect>
