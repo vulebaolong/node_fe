@@ -82,7 +82,7 @@ api.interceptors.response.use(
             const accessToken = getAccessToken();
 
             const { data } = await apiRefreshToken.post(
-               `${ENDPOINT.AUTH.REFRESH_TOKEN()}`,
+               `${ENDPOINT.AUTH.REFRESH_TOKEN}`,
                {},
                {
                   headers: {

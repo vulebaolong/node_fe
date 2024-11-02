@@ -37,7 +37,7 @@ export default userSlice.reducer;
 
 export const getInfo = () => {
    return async (dispatch: AppDispatch) => {
-      api.get<TRes<TUser>>(ENDPOINT.AUTH.GET_INFO())
+      api.get<TRes<TUser>>(ENDPOINT.AUTH.GET_INFO)
          .then(({ data }) => {
             dispatch(SET_INFO(data.metaData));
          })

@@ -1,20 +1,18 @@
 export const ENDPOINT = {
    AUTH: {
-      BASE: `auth`,
-      LOGIN: () => `${ENDPOINT.AUTH.BASE}/login`,
-      REGISTER: () => `${ENDPOINT.AUTH.BASE}/register`,
-      REFRESH_TOKEN: () => `${ENDPOINT.AUTH.BASE}/refresh-token`,
-      GET_INFO: () => `${ENDPOINT.AUTH.BASE}/get-info`,
-      FACEBOOK_LOGIN: () => `${ENDPOINT.AUTH.BASE}/facebook-login`,
-      GOOGLE_LOGIN: () => `${ENDPOINT.AUTH.BASE}/google-login`,
-      RESET_PASSWORD: () => `${ENDPOINT.AUTH.BASE}/reset-password`,
-      SEND_EMAIL: () => `${ENDPOINT.AUTH.BASE}/send-email`,
+      LOGIN: `auth/login`,
+      REGISTER: `auth/register`,
+      REFRESH_TOKEN: `auth/refresh-token`,
+      GET_INFO: `auth/get-info`,
+      FACEBOOK_LOGIN: `auth/facebook-login`,
+      GOOGLE_LOGIN: `auth/google-login`,
+      RESET_PASSWORD: `auth/reset-password`,
+      SEND_EMAIL: `auth/send-email`,
    },
    TWO_FA: {
-      BASE: `two-fa`,
-      CHECK_2FA_BEFORE_LOGIN: () => `${ENDPOINT.TWO_FA.BASE}/check-2fa-before-login`,
-      ON_OFF_2FA: () => `${ENDPOINT.TWO_FA.BASE}/on-off-2fa`,
-      GET_QR_2FA: () => `${ENDPOINT.TWO_FA.BASE}/get-qr`,
+      CHECK_2FA_BEFORE_LOGIN: `two-fa/check-2fa-before-login`,
+      ON_OFF_2FA: `two-fa/on-off-2fa`,
+      GET_QR_2FA: `two-fa/get-qr`,
    },
    VIDEO: {
       VIDEO_LIST_TEST: `video-list`,
@@ -35,7 +33,7 @@ export const ENDPOINT = {
    },
    CHAT: {
       BASE: (id = "") => `/chat/${id}`,
-      LIST_USER_CHAT: `chat/list-user-chat`
+      LIST_USER_CHAT: `chat/list-user-chat`,
    },
    USER: `user`,
    UPLOAD_AVATAR_LOCAL: `user/avatar-local`,
