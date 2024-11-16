@@ -1,59 +1,59 @@
-import { Badge, Box, Center, Group, Pagination, Select, Stack, Table, Text } from "@mantine/core";
+import { Badge, Box, Group, Pagination, Select, Stack, Table, Text } from "@mantine/core";
 import { useState } from "react";
 import { useGetUserList } from "../../common/api/tanstack/user.tanstack";
 import { Avatar } from "../../common/components/avatar/Avatar";
 
-const data = [
-   {
-      avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-9.png",
-      name: "Robert Wolfkisser",
-      job: "Engineer",
-      email: "rob_wolf@gmail.com",
-      role: "Collaborator",
-      lastActive: "2 days ago",
-      active: true,
-   },
-   {
-      avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-6.png",
-      name: "Jill Jailbreaker",
-      job: "Engineer",
-      email: "jj@breaker.com",
-      role: "Collaborator",
-      lastActive: "6 days ago",
-      active: true,
-   },
-   {
-      avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-10.png",
-      name: "Henry Silkeater",
-      job: "Designer",
-      email: "henry@silkeater.io",
-      role: "Contractor",
-      lastActive: "2 days ago",
-      active: false,
-   },
-   {
-      avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png",
-      name: "Bill Horsefighter",
-      job: "Designer",
-      email: "bhorsefighter@gmail.com",
-      role: "Contractor",
-      lastActive: "5 days ago",
-      active: true,
-   },
-   {
-      avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png",
-      name: "Jeremy Footviewer",
-      job: "Manager",
-      email: "jeremy@foot.dev",
-      role: "Manager",
-      lastActive: "3 days ago",
-      active: false,
-   },
-];
+// const data = [
+//    {
+//       avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-9.png",
+//       name: "Robert Wolfkisser",
+//       job: "Engineer",
+//       email: "rob_wolf@gmail.com",
+//       role: "Collaborator",
+//       lastActive: "2 days ago",
+//       active: true,
+//    },
+//    {
+//       avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-6.png",
+//       name: "Jill Jailbreaker",
+//       job: "Engineer",
+//       email: "jj@breaker.com",
+//       role: "Collaborator",
+//       lastActive: "6 days ago",
+//       active: true,
+//    },
+//    {
+//       avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-10.png",
+//       name: "Henry Silkeater",
+//       job: "Designer",
+//       email: "henry@silkeater.io",
+//       role: "Contractor",
+//       lastActive: "2 days ago",
+//       active: false,
+//    },
+//    {
+//       avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png",
+//       name: "Bill Horsefighter",
+//       job: "Designer",
+//       email: "bhorsefighter@gmail.com",
+//       role: "Contractor",
+//       lastActive: "5 days ago",
+//       active: true,
+//    },
+//    {
+//       avatar: "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png",
+//       name: "Jeremy Footviewer",
+//       job: "Manager",
+//       email: "jeremy@foot.dev",
+//       role: "Manager",
+//       lastActive: "3 days ago",
+//       active: false,
+//    },
+// ];
 
 let totalPage = 0;
 
-const rolesData = ["Manager", "Collaborator", "Contractor"];
+// const rolesData = ["Manager", "Collaborator", "Contractor"];
 
 export function Users() {
    const [page, setPage] = useState(1);

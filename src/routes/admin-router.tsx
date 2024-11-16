@@ -11,7 +11,6 @@ import Setting from "../pages/setting/Setting";
 import { Users } from "../pages/users/Users";
 import Video from "../pages/video/Video";
 import VideoDetail from "../pages/video/VideoDetail";
-import VideoTest from "../pages/video/VideoTest";
 
 const adminRouter = [
    {
