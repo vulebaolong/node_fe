@@ -1,7 +1,7 @@
 export let isProduction = import.meta.env.VITE_IS_PRODUCTION === "true";
 
 export const BASE_DOMAIN_API = import.meta.env.VITE_BASE_DOMAIN_API || `http://localhost:3069/`;
-// export const BASE_DOMAIN_API = `http://192.168.1.5:3069/`;
+// export const BASE_DOMAIN_API = `https://be-node.vulebaolong.com/`;
 
 export const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 
