@@ -12,6 +12,7 @@ import {
    Text,
    TextInput,
    Loader as LoaderMantine,
+   Center,
 } from "@mantine/core";
 import { useDebouncedCallback } from "@mantine/hooks";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
@@ -47,7 +48,9 @@ export default function Role() {
       if (listRole.isLoading)
          return (
             <Box mt={100}>
-               <Loader />
+               <Center>
+                  <Loader />
+               </Center>
             </Box>
          );
 

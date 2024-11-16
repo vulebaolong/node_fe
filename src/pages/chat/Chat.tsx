@@ -227,27 +227,28 @@ export default function Chat() {
                   <Stack className={classes.right}>
                      {/* header */}
                      <Box className={`${classes.header}`}>
-                        {isMobile && (
-                           <ActionIcon
-                              onClick={() => {
-                                 setStep(1);
-                              }}
-                              size={`xl`}
-                              variant="subtle"
-                              radius={`100%`}
-                              color="dark"
-                           >
-                              <IconArrowNarrowLeft color="var(--mantine-color-dark-1)" style={{ width: rem(24), height: rem(24) }} />
-                           </ActionIcon>
-                        )}
-                        {userSelected && (
-                           <Group>
-                              <Avatar user={userSelected} />
-                              <Text fz="sm" fw={700}>
-                                 {userSelected.full_name}
-                              </Text>
-                           </Group>
-                        )}
+                        <Group>
+                           {isMobile && (
+                              <ActionIcon
+                                 onClick={() => {
+                                    setStep(1);
+                                 }}
+                                 variant="subtle"
+                                 radius={`100%`}
+                                 color="dark"
+                              >
+                                 <IconArrowNarrowLeft color="var(--mantine-color-dark-1)" style={{ width: rem(24), height: rem(24) }} />
+                              </ActionIcon>
+                           )}
+                           {userSelected && (
+                              <Group>
+                                 <Avatar user={userSelected} />
+                                 <Text fz="sm" fw={700}>
+                                    {userSelected.full_name}
+                                 </Text>
+                              </Group>
+                           )}
+                        </Group>
                      </Box>
 
                      {/* list chat */}
