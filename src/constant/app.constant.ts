@@ -18,4 +18,4 @@ export const REFRESH_TOKEN = `REFRESH_TOKEN`;
 export const DEVICE_ID = `DEVICE_ID`;
 export const TIMEOUT_SEND_MAIL = `TIMEOUT_SEND_MAIL`;
 
-export const TITLE_BASE = `Cyber Long`;
+export const TITLE_BASE = `Cyber Media`;
