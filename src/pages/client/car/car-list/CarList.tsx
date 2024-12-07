@@ -5,14 +5,11 @@ import Nodata from "../../../../common/components/no-data/Nodata";
 import { CarItem } from "../car-item/CarItem";
 import classes from "./CarList.module.css";
 
-let totalPage = 0;
-
 export default function CarList() {
    const [page, setPage] = useState(1);
    const [pageSize, setPageSize] = useState(9);
 
-   const carList = useCarList({ page, pageSize });
-   totalPage = carList.data?.totalPage || totalPage;
+   const carList = useCarList();
 
    const renderContent = () => {
       if (carList.isLoading)
@@ -28,7 +25,7 @@ export default function CarList() {
             </Box>
          );
 
-      if (!carList.data?.items || carList.data.items.length === 0 || carList.isError)
+      if (!carList.data || carList.data.length === 0 || carList.isError)
          return (
             <Group h={`100%`}>
                <Nodata />
@@ -37,7 +34,7 @@ export default function CarList() {
 
       return (
          <div className={`${classes[`box-1`]}`}>
-            {carList.data?.items.map((car, i) => {
+            {carList.data.map((car, i) => {
                return <CarItem key={i} car={car} />;
             })}
          </div>
@@ -62,7 +59,7 @@ export default function CarList() {
 
          {renderContent()}
 
-         <Center mt={50}>
+         {/* <Center mt={50}>
             <Group>
                <Box style={{ width: `55px` }}>
                   <Select
@@ -79,7 +76,7 @@ export default function CarList() {
 
                <Pagination radius={`md`} size={`sm`} disabled={carList.isLoading} value={page} total={totalPage} onChange={setPage} />
             </Group>
-         </Center>
+         </Center> */}
       </Container>
    );
 }

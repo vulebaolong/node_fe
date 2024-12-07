@@ -11,7 +11,7 @@ export function CarItem({ car }: TProps) {
    return (
       <Card withBorder radius="md" className={classes.card}>
          <Card.Section className={classes.imageSection}>
-            <Image style={{ width: `100%`, height: `170px` }} src={car.image_url} alt="Tesla Model S" />
+            <Image style={{ width: `100%`, height: `170px`, objectFit: `contain` }} src={car.image_url} alt="Tesla Model S" />
          </Card.Section>
 
          <Group justify="space-between" mt="md">
