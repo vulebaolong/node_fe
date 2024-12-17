@@ -1,24 +1,18 @@
-import { Badge, Box, Center, Container, Group, Pagination, Select, Skeleton, Text, Title } from "@mantine/core";
-import { useState } from "react";
+import { Badge, Box, Container, Group, Skeleton, Text, Title } from "@mantine/core";
 import { useCarList } from "../../../../common/api/tanstack/car.tanstack";
 import Nodata from "../../../../common/components/no-data/Nodata";
 import { CarItem } from "../car-item/CarItem";
 import classes from "./CarList.module.css";
 
-let totalPage = 0;
 
 export default function CarList() {
-   const [page, setPage] = useState(1);
-   const [pageSize, setPageSize] = useState(9);
-
-   const carList = useCarList({ page, pageSize });
-   // totalPage = carList.data?.totalPage || totalPage;
+   const carList = useCarList();
 
    const renderContent = () => {
       if (carList.isLoading)
          return (
             <Box className={`${classes[`box-1`]}`}>
-               {Array.from({ length: pageSize }, () => "").map((_, i) => {
+               {Array.from({ length: 9 }, () => "").map((_, i) => {
                   return (
                      <div key={i}>
                         <Skeleton styles={{ root: { width: `356px`, height: `420px` } }} />
