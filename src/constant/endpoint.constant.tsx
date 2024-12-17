@@ -42,5 +42,5 @@ export const ENDPOINT = {
    TOGGLE_PERMISSION: `role/toggle-permission`,
    PERMISSION_GROUP_BY_MODULE: `permission/group-by-module`,
    PAYMENT_MOMO: `payment/momo-pay`,
-   CAR: "cars",
+   CAR: "car/cars-list",
 };
