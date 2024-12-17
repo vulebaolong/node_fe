@@ -1,15 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { ENDPOINT } from "../../../constant/endpoint.constant";
-import { TCar } from "../../../types/aar.type";
 import api from "../axios/axios";
+import { TRes, TResPagination } from "../../../types/app.type";
+import { TCar } from "../../../types/aar.type";
+import { ENDPOINT } from "../../../constant/endpoint.constant";
 
+type TUseCarList = {
+   page: number;
+   pageSize: number;
+   search?: string;
+};
 
-export const useCarList = () => {
+export const useCarList = ({ page, pageSize, search }: TUseCarList) => {
    return useQuery({
-      queryKey: [`car-list`],
+      queryKey: [`car-list`, page, pageSize, search],
       queryFn: async () => {
-         const { data } = await api.get<TCar[]>(`${ENDPOINT.CAR}`);
-         return data;
+         const { data } = await api.get<TRes<TCar[]>>(`${ENDPOINT.CAR}?page=${page}&pageSize=${pageSize}`);
+         return data.metaData;
       },
    });
 };
+
+ 

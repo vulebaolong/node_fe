@@ -5,11 +5,14 @@ import Nodata from "../../../../common/components/no-data/Nodata";
 import { CarItem } from "../car-item/CarItem";
 import classes from "./CarList.module.css";
 
+let totalPage = 0;
+
 export default function CarList() {
    const [page, setPage] = useState(1);
    const [pageSize, setPageSize] = useState(9);
 
-   const carList = useCarList();
+   const carList = useCarList({ page, pageSize });
+   // totalPage = carList.data?.totalPage || totalPage;
 
    const renderContent = () => {
       if (carList.isLoading)
