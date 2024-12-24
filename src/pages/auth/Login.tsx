@@ -53,26 +53,36 @@ export default function Login() {
 
          console.log(payload);
 
-         check2FaBeforeLogin.mutate(valuesRaw.email.trim(), {
-            onSuccess: (is2Fa) => {
-               if (is2Fa) {
-                  setStep(`2 fa`);
-               } else {
-                  login.mutate(payload, {
-                     onSuccess: (result) => {
-                        hanldeSuccess(result);
-                     },
-                     onError: (error) => {
-                        console.log(error);
-                        toast.error(resError(error, `Login failed`));
-                     },
-                  });
-               }
+         login.mutate(payload, {
+            onSuccess: (result) => {
+               hanldeSuccess(result);
             },
-            onError: (err) => {
-               toast.error(resError(err, `Check before login failed`));
+            onError: (error) => {
+               console.log(error);
+               toast.error(resError(error, `Login failed`));
             },
          });
+
+         // check2FaBeforeLogin.mutate(valuesRaw.email.trim(), {
+         //    onSuccess: (is2Fa) => {
+         //       if (is2Fa) {
+         //          setStep(`2 fa`);
+         //       } else {
+         //          login.mutate(payload, {
+         //             onSuccess: (result) => {
+         //                hanldeSuccess(result);
+         //             },
+         //             onError: (error) => {
+         //                console.log(error);
+         //                toast.error(resError(error, `Login failed`));
+         //             },
+         //          });
+         //       }
+         //    },
+         //    onError: (err) => {
+         //       toast.error(resError(err, `Check before login failed`));
+         //    },
+         // });
       },
    });
 
