@@ -13,6 +13,7 @@ import { useAppSelector } from "../../store/store";
 import { TListChatRes } from "../../types/chat.type";
 import { TListUserChatRes } from "../../types/user.type";
 import classes from "./Chat.module.css";
+import axios from "axios";
 
 export default function Chat() {
    const bottomRef = useRef<HTMLDivElement>(null);
@@ -76,7 +77,7 @@ export default function Chat() {
          // Lắng nghe tin nhắn từ server
          socketRef.current.on("receive-message", (data: any) => {
             setListMessage((prev) => {
-               if (prev === null) return null;
+               if (prev === null) return [data];
                return [...prev, data];
             });
             // console.log(data);
@@ -147,6 +148,15 @@ export default function Chat() {
                      user_id_sender: info?.user_id,
                      user_id_recipient: user.user_id,
                   });
+                  // axios
+                  //    .get("/get-list-message")
+                  //    .then(({ data }) => {
+                  //       setListMessage((prev) => {
+                  //          if (prev === null) return [data];
+                  //          return [...prev, data];
+                  //       });
+                  //    })
+                  //    .catch(() => {});
                }}
                className={`${classes.itemUser}`}
                key={i}

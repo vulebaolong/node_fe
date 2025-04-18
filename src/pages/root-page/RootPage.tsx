@@ -38,9 +38,9 @@ export default function RootPage({ children, title = "", meta, protect = false }
       }
    }, [networkStatus.online]);
 
-   // useEffect(() => {
-   //    if (protect)  dispatch(getInfo());
-   // }, [location]);
+   useEffect(() => {
+      if (protect)  dispatch(getInfo());
+   }, [location]);
 
    const renderContent = () => {
       if (isRoute) {
